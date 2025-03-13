@@ -23,6 +23,5 @@
 						nvf.homeManagerModules.default
 					]; 
 				};
-	packages.${system}.default = pkgs.hello;
   	};
 }

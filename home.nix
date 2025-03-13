@@ -1,23 +1,17 @@
 {config, pkgs, ...}: {
-    home.username = "xavier";
-    home.homeDirectory = "/home/xavier";
-    home.stateVersion = "24.05"; # To figure this out you can comment out the line and see what version it expected.
-    home.packages = [
-        pkgs.ripgrep
-    ];
-    programs.home-manager.enable = true;
+	imports = [
+		./variables.nix
+		./home-programs/git
+		./home-programs/nvim
+	];
 
-	programs.git = {
-		enable = true;
-		userName = "xv1r";
-		userEmail = "xavytron@gmail.com";
-		extraConfig = {
-			init.defaultBranch = "main";
-			push.autoSetupRemote = true;
-			color.ui = "1";
-		};
-		aliases = {
-			oops = "checkout --";
-		};
+	home = {
+		inherit (config.var) username;
+		homeDirectory = "/home/" + config.var.username;
+		packages = [
+			pkgs.ripgrep
+		];
+		stateVersion = "24.05";
 	};
+    programs.home-manager.enable = true;
 }
