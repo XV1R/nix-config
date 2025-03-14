@@ -23,6 +23,32 @@
 					enableTreesitter = true;
 					nix.enable = true;
 				};
+                keymaps = [
+                    {
+                        key = "<leader>ff";
+                        mode = "n";
+                        silent = true;
+                        action = "<cmd>Telescope find_files<cr>";
+                    }
+                    {
+                        key = "<leader>fg";
+                        mode = "n";
+                        silent = true;
+                        action = "<cmd>Telescope live_grep<cr>";
+                    }
+                    {
+                        key = "<leader>fb";
+                        mode = "n";
+                        silent = true;
+                        action = "<cmd>Telescope buffers<cr>";
+                    }
+                    {
+                        key = "<leader>fh";
+                        mode = "n";
+                        silent = true;
+                        action = "<cmd>Telescope help_tags<cr>";
+                    }
+                ];
 			};
 		};
 	};
