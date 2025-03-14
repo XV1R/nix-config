@@ -22,6 +22,8 @@
 					enableLSP = true;
 					enableTreesitter = true;
 					nix.enable = true;
+                    clang.enable = true;
+                    python.enable = true;
 				};
                 keymaps = [
                     {

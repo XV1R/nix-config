@@ -8,8 +8,12 @@
 	home = {
 		inherit (config.var) username;
 		homeDirectory = "/home/" + config.var.username;
-		packages = [
-			pkgs.ripgrep
+		
+		packages = with pkgs; [
+		    ripgrep
+			eza
+            just
+            dua
 		];
 		stateVersion = "24.05";
 	};
