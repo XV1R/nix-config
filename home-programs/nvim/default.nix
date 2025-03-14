@@ -1,13 +1,19 @@
-{pkgs, lib, config, ...}@inputs:
+{pkgs, lib, config, ...}:
 {
-	programs.nvf = {
+    programs.nvf = {
 		enable = true;
 		settings = {
 			vim = {
+				lineNumberMode = "relative";
+				options = {
+					tabstop = 4;
+					shiftwidth = 4;
+					autoindent = true;
+				};
 				theme = {
-						enable = true;
-						name = "gruvbox";
-						style = "dark";
+					enable = true;
+					name = "gruvbox";
+					style = "dark";
 				};
 				statusline.lualine.enable = true;
 				autocomplete.nvim-cmp.enable = true;
