@@ -1,10 +1,10 @@
 { config, lib, ... }: {
-  config.var = {
-	username = "xavier";
-    git = {
-      username = "XV1R";
-      email = "xavytron@gmail.com";
-    };
+    config.var = {
+        username = "xavier";
+        git = {
+            username = "XV1R";
+            email = "xavytron@gmail.com";
+        };
   };
 
 	options = {
