@@ -4,6 +4,10 @@
 		./home-programs/git
 		./home-programs/nvim
         ./home-programs/bash
+        ./home-programs/lazy-git
+        ./home-programs/starship
+        ./home-programs/zoxide
+        ./home-programs/fzf
         #        ./home-programs/fish
 	];
 
@@ -16,10 +20,15 @@
 			eza
             just
             dua
+            jq
 		];
         shellAliases = {
             g = "git";
+            c = "z";
             ls = "exa --icons=always --group-directories-first";
+            l = "ls";
+            ll = "ls -T";
+            j = "just";
             ".." = "cd ..";
         };
         sessionVariables = {
