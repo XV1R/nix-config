@@ -1,12 +1,16 @@
-{}:
+{ lib, ... }:
 {
     programs.fish = {
-        enable = true;
+        enable = false;
         generateCompletions = true;
         shellAbbrs = {
-            ls = "exa --icons=always --group-directories-first";
-            l = "exa -l";
-            ".." = "cd ..";
+            greenfn = "echo this worked lmao";
         };
+	shellInit = ''
+	if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
+    		source $HOME/.nix-profile/etc/profile.d/nix.sh
+	end
+	'';
+
     };
 }

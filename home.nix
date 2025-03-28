@@ -1,14 +1,14 @@
 {config, pkgs, ...}: {
 	imports = [
-		./variables.nix
-		./home-programs/git
-		./home-programs/nvim
+	    ./variables.nix
+	    ./home-programs/git
+	    ./home-programs/nvim
         ./home-programs/bash
         ./home-programs/lazy-git
         ./home-programs/starship
         ./home-programs/zoxide
         ./home-programs/fzf
-        #        ./home-programs/fish
+       # ./home-programs/fish
 	];
 
 	home = {
@@ -35,6 +35,7 @@
             EDITOR = "neovim";
         };
         #shell.enableFishIntegration = true;
+	shell.enableBashIntegration = true;
 		stateVersion = "24.05";
 	};
     programs.home-manager.enable = true;

@@ -4,7 +4,7 @@
 		enable = true;
 		settings = {
 			vim = {
-				lineNumberMode = "relative";
+				lineNumberMode = "relNumber";
 				options = {
 					tabstop = 4;
 					shiftwidth = 4;
