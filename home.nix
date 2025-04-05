@@ -29,6 +29,7 @@
             l = "ls";
             ll = "ls -T";
             j = "just";
+            copy = "xclip -sel clip";
             ".." = "cd ..";
         };
         sessionVariables = {
