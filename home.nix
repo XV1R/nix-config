@@ -8,6 +8,7 @@
         ./home-programs/zoxide
         ./home-programs/fzf
         ./home-programs/zellij
+        ./home-programs/alacritty
 	];
 
 	home = {
