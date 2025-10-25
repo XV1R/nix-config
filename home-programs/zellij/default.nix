@@ -1,8 +1,11 @@
-{pkgs, lib, ... }:
+{ pkgs, lib, ... }:
+
 {
-    programs.zellij = {
-        enable = true;
-        enableBashIntegration = true;
-        attachExistingSession = true;
-    };
+  programs.zellij = {
+    enable = true;
+    enableBashIntegration = true;
+    attachExistingSession = true;
+
+    settings.theme = "gruvbox-dark"; 
+  };
 }
