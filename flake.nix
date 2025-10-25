@@ -21,8 +21,5 @@
                 nvf.homeManagerModules.default
             ]; 
         };
-            #programs.fish.enable = true;
-            #environment.shells = with pkgs; [ fish ];
-            #users.users."xavier".shell = pkgs.fish;
     };
 }

@@ -5,8 +5,13 @@ let
 in {
   programs.git = {
     enable = true;
-    userName = username;
-    userEmail = email;
+    settings = {
+        init.defaultBranch = "main";
+        push.autoSetupRemote = true;
+        color.ui = "1";
+        user.name = username;
+        user.email = email;
+    };
     ignores = [
       ".cache/"
       ".DS_Store"
@@ -19,12 +24,5 @@ in {
       "result"
       "result-*"
     ];
-    extraConfig = {
-      init.defaultBranch = "main";
-      push.autoSetupRemote = true;
-      color.ui = "1";
-    };
-    aliases = {
-    };
   };
 }

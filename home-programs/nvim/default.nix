@@ -4,6 +4,7 @@
 		enable = true;
 		settings = {
 			vim = {
+                lsp.enable = true;
 				lineNumberMode = "relNumber";
 				options = {
 					tabstop = 4;
@@ -19,7 +20,6 @@
 				autocomplete.nvim-cmp.enable = true;
 				telescope.enable = true;
 				languages = {
-					enableLSP = true;
 					enableTreesitter = true;
 					nix.enable = true;
                     clang.enable = true;

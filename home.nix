@@ -5,37 +5,36 @@
 	    ./home-programs/nvim
         ./home-programs/bash
         ./home-programs/lazy-git
-        ./home-programs/starship
         ./home-programs/zoxide
         ./home-programs/fzf
-       # ./home-programs/fish
+        ./home-programs/zellij
 	];
 
 	home = {
 		inherit (config.var) username;
 		homeDirectory = "/home/" + config.var.username;
-		
 		packages = with pkgs; [
 		    ripgrep
 			eza
             just
             dua
             jq
+            glow
 		];
         shellAliases = {
             g = "git";
             c = "z";
-            ls = "exa --icons=always --group-directories-first";
+            ls = "exa --group-directories-first";
             l = "ls";
             ll = "ls -T";
             j = "just";
             copy = "xclip -sel clip";
             ".." = "cd ..";
+            "md" = "glow";
         };
         sessionVariables = {
             EDITOR = "neovim";
         };
-        #shell.enableFishIntegration = true;
 	shell.enableBashIntegration = true;
 		stateVersion = "24.05";
 	};
