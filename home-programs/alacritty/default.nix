@@ -5,7 +5,7 @@
         text = lib.generators.toYAML {} {
             font = {
                 normal.family = "Miracode";
-                size = 16;
+                size = 20;
             };
 
 
