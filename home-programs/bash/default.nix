@@ -1,13 +1,12 @@
 {pkgs, lib, config, ...}:
+let
+  fakeBash = pkgs.runCommand "fake-bash" {} "mkdir $out";
+in
 {
     programs.bash = {
 		enable = true;
+        package = fakeBash;
         enableCompletion = true;
-        shellAliases =  {
-            #ls ="eza --icons=always --group-directories-first";
-            #l = "eza -l"; 
-            #".." = "cd ..";
-        };
         historyIgnore = [
             "ls"
             "eza"
