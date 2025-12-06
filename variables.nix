@@ -5,6 +5,8 @@
             username = "XV1R";
             email = "xavytron@gmail.com";
         };
+
+        uchu = lib.importJSON ./uchu.json;
   };
 
 	options = {

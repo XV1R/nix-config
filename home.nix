@@ -23,6 +23,7 @@
                 dua
                 jq
                 glow
+                rustup
             ];
             shellAliases = {
                 g = "git";
@@ -38,6 +39,10 @@
             sessionVariables = {
                 EDITOR = "neovim";
             };
+            sessionPath = [
+                "$HOME/.cargo/bin"
+                "$HOME/.extra-bins"
+            ];
         shell.enableBashIntegration = true;
             stateVersion = "24.05";
         };
