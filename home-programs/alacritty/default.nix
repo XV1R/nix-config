@@ -1,11 +1,9 @@
 { config, pkgs, ... }:
 
 let
-  # This creates a TOML format generator using the pkgs library
   tomlFormat = pkgs.formats.toml { };
 in
 {
-  # We use .source instead of .text when using pkgs.formats
   xdg.configFile."alacritty/alacritty.toml".source = tomlFormat.generate "alacritty-config" {
     
     font = {
@@ -14,10 +12,10 @@ in
     };
 
     shell = {
-      program = "${pkgs.bash}/bin/bash";
+        program = "${pkgs.zellij}/bin/zellij";
+        args = [ "attach" "-c" "main" ];
     };
 
-    # FIXED: 'colors' is now properly nested inside the settings object
     colors = {
       primary = {
         background = "${config.var.uchu.yin.light}";
@@ -50,7 +48,7 @@ in
     };
   };
 
-  # Ensure Alacritty knows to look for this
+  # 3. Ensure Environment Variables align
   home.sessionVariables = {
     TERMINAL = "alacritty";
   };

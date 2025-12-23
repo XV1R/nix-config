@@ -3,8 +3,7 @@
 {
   programs.zellij = {
     enable = true;
-    enableBashIntegration = true;
-    attachExistingSession = true;
+    enableBashIntegration = false;
 
     settings.theme = "gruvbox-dark"; 
   };
