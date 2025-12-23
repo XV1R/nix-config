@@ -11,6 +11,7 @@
             ./home-programs/fzf
             ./home-programs/zellij
             ./home-programs/alacritty
+            ./home-programs/zed
         ];
 
         home = {
