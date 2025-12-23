@@ -4,5 +4,7 @@ let
 in {
   xdg.configFile."zed/settings.json".source = 
     config.lib.file.mkOutOfStoreSymlink "${configPath}/settings.json";
+  xdg.configFile."zed/keymap.json".source = 
+    config.lib.file.mkOutOfStoreSymlink "${configPath}/keymap.json";
 }
 

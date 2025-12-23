@@ -26,8 +26,8 @@
   "ui_font_size": 16,
   "buffer_font_size": 15,
   "theme": {
-    "mode": "dark",
-    "light": "Gruvbox Light Hard",
+    "mode": "light",
+    "light": "macOS Classic Light",
     "dark": "Gruvbox Dark Hard",
   },
 }
