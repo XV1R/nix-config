@@ -7,6 +7,42 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "language_models": {
+    "openai_compatible": {
+      "llama.cpp": {
+        "api_url": "http://localhost:8080",
+        "available_models": [
+          {
+            "name": "Qwen3-Esper3-Reasoning-CODER-Instruct-12B",
+            "display_name": "Qwen3-Coder-12B",
+            "max_tokens": 32768,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+            },
+          },
+          {
+            "name": "Qwen3-Code-Reasoning-4b",
+            "display_name": "Qwen3-Coder-4b",
+            "max_tokens": 2048,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+            },
+          },
+        ],
+      },
+    },
+  },
+  "indent_guides": {
+    "line_width": 3,
+    "active_line_width": 1,
+    "coloring": "indent_aware",
+  },
   "buffer_font_family": ".ZedMono",
   "edit_predictions": {
     "mode": "subtle",
@@ -14,7 +50,7 @@
   "show_edit_predictions": false,
   "disable_ai": false,
   "agent": {
-    "default_profile": "minimal",
+    "default_profile": "ask",
     "default_model": {
       "provider": "ollama",
       "model": "qwen3:14b",
