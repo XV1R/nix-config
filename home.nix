@@ -1,4 +1,4 @@
-{config, pkgs, ...}: 
+{config, pkgs, ...}:
 {
         targets.genericLinux.enable = true;
         imports = [
@@ -25,6 +25,8 @@
                 jq
                 glow
                 rustup
+                nil
+                llama-cpp
             ];
             shellAliases = {
                 g = "git";
@@ -43,9 +45,10 @@
             sessionPath = [
                 "$HOME/.cargo/bin"
                 "$HOME/.extra-bins"
+                "$HOME/.local/bin"
             ];
             stateVersion = "24.05";
         };
         programs.home-manager.enable = true;
-    
+
 }
