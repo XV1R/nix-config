@@ -1,28 +1,11 @@
 [
   {
-    "context": "Editor && vim_mode == normal",
+    "context": "Terminal",
     "bindings": {
-      // Replicating your Telescope Bindings
-      // Assuming your <leader> is set to Space
-
-      // <leader>ff -> Find Files
-      "space f f": "file_finder::Toggle",
-
-      // <leader>fg -> Live Grep (Project Search)
-      "space f g": "pane::DeploySearch",
-
-      // <leader>fb -> Buffers (Tab Switcher)
-      "space f b": "tab_switcher::Toggle",
-
-      // <leader>fh -> Help Tags (Command Palette is the best equivalent)
-      "space f h": "command_palette::Toggle"
-    }
-  },
-  {
-    "context": "Editor && vim_mode == visual",
-    "bindings": {
-      // Allow specific bindings to work in visual mode too if needed
-      "space f g": "pane::DeploySearch" 
+      "shift-enter": [
+        "terminal::SendText",
+        "\u001b\r"
+      ]
     }
   }
 ]

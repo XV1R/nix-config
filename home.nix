@@ -12,6 +12,7 @@
             ./home-programs/zellij
             ./home-programs/alacritty
             ./home-programs/zed
+            ./home-programs/ghostty
         ];
 
         home = {
@@ -27,6 +28,7 @@
                 rustup
                 nil
                 llama-cpp
+                fd
             ];
             shellAliases = {
                 g = "git";
@@ -40,7 +42,7 @@
                 "md" = "glow";
             };
             sessionVariables = {
-                EDITOR = "neovim";
+                EDITOR = "nvim";
             };
             sessionPath = [
                 "$HOME/.cargo/bin"
@@ -48,6 +50,7 @@
                 "$HOME/.local/bin"
             ];
             stateVersion = "24.05";
+
         };
         programs.home-manager.enable = true;
 

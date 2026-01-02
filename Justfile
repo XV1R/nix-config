@@ -21,3 +21,11 @@ setup-system:
 
 update-all: setup-system switch
     @echo "Fully synced."
+
+cargo-stuff:
+    #bacon is more modern version of cargo watch
+    cargo install --locked bacon
+    #cargo asm is unmaintained
+    cargo install cargo-show-asm
+    cargo install flamegraph
+    cargo install layout-audit

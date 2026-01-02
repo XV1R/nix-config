@@ -1,0 +1,28 @@
+{
+  "base00": "#131313",
+  "base01": "#1f1f1f",
+  "base02": "#1f1f1f",
+  "base03": "#b9b9b9",
+  "base04": "#b9b9b9",
+  "base05": "#d6dbe5",
+  "base06": "#ffffff",
+  "base07": "#ffffff",
+  "base08": "#f81118",
+  "base09": "#de352e",
+  "base0A": "#ecba0f",
+  "base0B": "#2dc55e",
+  "base0C": "#1081d6",
+  "base0D": "#2a84d2",
+  "base0E": "#4e5ab7",
+  "base0F": "#5350b9",
+
+  "cursor": {
+    "color": "#b9b9b9",
+    "text": "#101010"
+  },
+  "selection": {
+    "background": "#1f1f1f",
+    "foreground": "#d6dbe5"
+  }
+}
+

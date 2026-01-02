@@ -7,6 +7,7 @@
         };
 
         uchu = lib.importJSON ./uchu.json;
+        brogrammer = lib.importJSON ./brogrammer.json;
   };
 
 	options = {

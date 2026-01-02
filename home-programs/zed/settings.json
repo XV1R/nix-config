@@ -43,17 +43,22 @@
     "active_line_width": 1,
     "coloring": "indent_aware",
   },
-  "buffer_font_family": ".ZedMono",
+  "buffer_font_family": "Miracode",
   "edit_predictions": {
     "mode": "subtle",
   },
   "show_edit_predictions": false,
   "disable_ai": false,
   "agent": {
+    "message_editor_min_lines": 3,
+    "inline_assistant_model": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5-latest"
+    },
     "default_profile": "ask",
     "default_model": {
-      "provider": "ollama",
-      "model": "qwen3:14b",
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5-latest",
     },
     "model_parameters": [],
   },
@@ -62,8 +67,8 @@
   "ui_font_size": 16,
   "buffer_font_size": 15,
   "theme": {
-    "mode": "light",
+    "mode": "dark",
     "light": "macOS Classic Light",
-    "dark": "Gruvbox Dark Hard",
+    "dark": "macOS Classic Dark",
   },
 }
