@@ -11,6 +11,7 @@ in {
         color.ui = "1";
         user.name = username;
         user.email = email;
+        merge.conflictstyle = "zdiff3";
     };
     ignores = [
       ".cache/"
