@@ -4,6 +4,7 @@
         imports = [
             ./variables.nix
             ./home-programs/git
+            ./home-programs/jujutsu
             ./home-programs/delta
             ./home-programs/nvim
             ./home-programs/bash
