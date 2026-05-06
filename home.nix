@@ -29,6 +29,7 @@
                 glow
                 rustup
                 nil
+                helix
                 llama-cpp
                 fd
             ];
