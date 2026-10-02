@@ -12,6 +12,15 @@
 
   programs.home-manager.enable = true;
 
+  # opencode, configured entirely through Home Manager:
+  # - context: global rules, written to ~/.config/opencode/AGENTS.md (auto-read by opencode)
+  # - agents:  agent definitions, written to ~/.config/opencode/agents/
+  programs.opencode = {
+    enable = true;
+    context = ./opencode/instructions.md;
+    agents.nix-coder = ./opencode/agents/nix-coder.md;
+  };
+
   # nix-skills: links the skill collection read-only from the Nix store into
   # ~/.config/opencode/skills for opencode's native skill discovery.
   # Note: opencode also reads ~/.claude/skills and ~/.agents/skills, so adding
@@ -20,16 +29,6 @@
     enable = true;
     agents = ["opencode"];
     # skills = [ "nix-language" "nixos-operations" ];  # omit for the full set
-  };
-
-  # opencode is customized here; nothing under ~/.config/opencode is edited by hand.
-  xdg.configFile = {
-    "opencode/agent/nix-coder.md".source = ./opencode/agents/nix-coder.md;
-    "opencode/instructions.md".source = ./opencode/instructions.md;
-    "opencode/opencode.json".text = builtins.toJSON {
-      "$schema" = "https://opencode.ai/config.json";
-      instructions = [ "/home/xavier/.config/opencode/instructions.md" ];
-    } + "\n";
   };
 
   home.packages = with pkgs; [ ];

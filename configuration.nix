@@ -100,7 +100,6 @@
 	fzf
 	alejandra
 	ripgrep
-	opencode
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
