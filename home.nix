@@ -22,8 +22,15 @@
     # skills = [ "nix-language" "nixos-operations" ];  # omit for the full set
   };
 
-  # opencode global agent definitions
-  xdg.configFile."opencode/agent/nix-coder.md".source = ./agents/nix-coder.md;
+  # opencode is customized here; nothing under ~/.config/opencode is edited by hand.
+  xdg.configFile = {
+    "opencode/agent/nix-coder.md".source = ./opencode/agents/nix-coder.md;
+    "opencode/instructions.md".source = ./opencode/instructions.md;
+    "opencode/opencode.json".text = builtins.toJSON {
+      "$schema" = "https://opencode.ai/config.json";
+      instructions = [ "/home/xavier/.config/opencode/instructions.md" ];
+    } + "\n";
+  };
 
   home.packages = with pkgs; [ ];
 }
