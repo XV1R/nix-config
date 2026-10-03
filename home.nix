@@ -19,6 +19,26 @@
     enable = true;
     context = ./opencode/instructions.md;
     agents.nix-coder = ./opencode/agents/nix-coder.md;
+    # Format Nix files after the agent edits them
+    settings.formatter.nix = {
+      command = ["alejandra"];
+      extensions = [".nix"];
+    };
+  };
+
+  # Helix: format Nix buffers with alejandra on save (auto-format on write).
+  programs.helix = {
+    enable = true;
+    languages.language = [
+      {
+        name = "nix";
+        auto-format = true;
+        formatter = {
+          command = "alejandra";
+          args = ["-"];
+        };
+      }
+    ];
   };
 
   # nix-skills: links the skill collection read-only from the Nix store into
@@ -39,7 +59,6 @@
 
   home.packages = with pkgs; [
     eza
-    helix
     fd
     dust
     just
