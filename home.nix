@@ -9,10 +9,18 @@
   imports = [
     ./programs/opencode
     ./programs/delta
+    ./programs/jujutsu
   ];
   home.username = "xavier";
   home.homeDirectory = "/home/xavier";
   home.stateVersion = "26.05";
+
+  config.var = {
+    git = {
+      username = "XV1R";
+      email = "xavytron@gmail.com";
+    };
+  };
 
   programs.home-manager.enable = true;
 
