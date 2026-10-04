@@ -9,31 +9,16 @@
   imports = [
     ./vars.nix
     ./programs/opencode
+    ./programs/helix
     ./programs/git
     ./programs/delta
     ./programs/jujutsu
-    ./programs/fzf
   ];
   home.username = "xavier";
   home.homeDirectory = "/home/xavier";
   home.stateVersion = "26.05";
 
   programs.home-manager.enable = true;
-
-  # Helix: format Nix buffers with alejandra on save (auto-format on write).
-  programs.helix = {
-    enable = true;
-    languages.language = [
-      {
-        name = "nix";
-        auto-format = true;
-        formatter = {
-          command = "alejandra";
-          args = ["-"];
-        };
-      }
-    ];
-  };
 
   # nix-skills: links the skill collection read-only from the Nix store into
   # ~/.config/opencode/skills for opencode's native skill discovery.
