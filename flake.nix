@@ -43,6 +43,13 @@
       url = "github:abenz1267/walker";
       inputs.elephant.follows = "elephant";
     };
+
+    # MicroVMs (see microvms/) and the Minecraft server stack for the guest
+    microvm.url = "github:microvm-nix/microvm.nix";
+    microvm.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    nix-minecraft.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -56,6 +63,8 @@
     hax,
     elephant,
     walker,
+    microvm,
+    nix-minecraft,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -105,8 +114,12 @@
 
     saturn = nixpkgs.lib.nixosSystem {
       inherit system;
+      # Modules may declare {inputs, ...} to reach flake inputs
+      specialArgs = {inherit inputs;};
       modules = [
         ./configuration.nix
+        microvm.nixosModules.host
+        ./microvms/host.nix
         home-manager.nixosModules.home-manager
         {
           # Launcher modules are Linux-only: walker's upstream module plus
