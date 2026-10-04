@@ -22,17 +22,8 @@
   } @ inputs: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-  in {
-    # `nix fmt` runs alejandra over the tree. Bare `nix fmt` passes no
-    # arguments, which would make alejandra read stdin, so default to `.`.
-    formatter.${system} = pkgs.writeShellScriptBin "alejandra" ''
-      if [[ "$#" -eq 0 ]]; then
-        set -- .
-      fi
-      exec ${pkgs.alejandra}/bin/alejandra "$@"
-    '';
 
-    nixosConfigurations.saturn = nixpkgs.lib.nixosSystem {
+    saturn = nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [
         ./configuration.nix
@@ -45,5 +36,19 @@
         }
       ];
     };
+  in {
+    # Bare `nix build` / `nix eval` operate on the system closure
+    packages.${system}.default = saturn.config.system.build.toplevel;
+
+    # `nix fmt` runs alejandra over the tree. Bare `nix fmt` passes no
+    # arguments, which would make alejandra read stdin, so default to `.`.
+    formatter.${system} = pkgs.writeShellScriptBin "alejandra" ''
+      if [[ "$#" -eq 0 ]]; then
+        set -- .
+      fi
+      exec ${pkgs.alejandra}/bin/alejandra "$@"
+    '';
+
+    nixosConfigurations.saturn = saturn;
   };
 }

@@ -7,8 +7,7 @@ Guidance for AI coding agents working on this machine. These rules apply in ever
 This machine uses Jujutsu (`jj`) for version control. Repositories may be colocated with git, but agents must not drive git directly.
 
 - Use `jj` for all version control operations: `jj st`, `jj log`, `jj diff`, `jj describe`, `jj commit`, `jj new`, `jj undo`.
-- Never run mutating git commands (`git add`, `git commit`, `git push`, `git checkout`, `git restore`, ...).
-- Narrow exception: nix flakes can only read git-tracked files, so after creating new files inside a nix flake repository, `git add <paths>` may be needed purely as build plumbing so evaluation can see them. This is not version control — jj tracks the working copy automatically. Use `jj describe`/`jj commit`/`jj new` for all history operations.
+- Never run git commands — including `git add` for nix flake visibility. This workspace is deliberately **not** colocated with git, so nix reads the working copy directly and no git plumbing is ever needed. If a tool reports files are "not tracked by Git", the workspace has been re-colocated by mistake; fix the setup instead of running git.
 
 ## Declarative configuration only
 

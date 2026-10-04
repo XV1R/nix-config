@@ -6,25 +6,14 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ./programs/opencode
+  ];
   home.username = "xavier";
   home.homeDirectory = "/home/xavier";
   home.stateVersion = "26.05";
 
   programs.home-manager.enable = true;
-
-  # opencode, configured entirely through Home Manager:
-  # - context: global rules, written to ~/.config/opencode/AGENTS.md (auto-read by opencode)
-  # - agents:  agent definitions, written to ~/.config/opencode/agents/
-  programs.opencode = {
-    enable = true;
-    context = ./opencode/instructions.md;
-    agents.nix-coder = ./opencode/agents/nix-coder.md;
-    # Format Nix files after the agent edits them
-    settings.formatter.nix = {
-      command = ["alejandra"];
-      extensions = [".nix"];
-    };
-  };
 
   # Helix: format Nix buffers with alejandra on save (auto-format on write).
   programs.helix = {
