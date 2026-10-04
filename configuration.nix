@@ -78,7 +78,7 @@
   users.users."xavier" = {
     isNormalUser = true;
     description = "xavier";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "video"];
     packages = with pkgs; [
       #  thunderbird
     ];
