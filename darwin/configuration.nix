@@ -4,10 +4,15 @@
 {
   config,
   pkgs,
+  inputs,
   macUser,
   ...
 }: {
   nixpkgs.hostPlatform = "aarch64-darwin";
+
+  # Bare `nixpkgs#` references (incl. comma) resolve to the exact locked
+  # rev this system was built from (the darwin branch).
+  nix.registry.nixpkgs.flake = inputs.nixpkgs-darwin;
 
   # Fresh nix-darwin install on this release — do not change after bootstrapping.
   system.stateVersion = 6;

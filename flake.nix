@@ -82,13 +82,16 @@
         home-manager.nixosModules.home-manager
         {
           home-manager = hmFor "xavier" "/home/xavier";
+          # Bare `nixpkgs#` references (incl. comma) resolve to the exact
+          # locked rev this system was built from.
+          nix.registry.nixpkgs.flake = nixpkgs;
         }
       ];
     };
 
     mac = nix-darwin.lib.darwinSystem {
       system = darwinSystem;
-      specialArgs = {inherit macUser;};
+      specialArgs = {inherit macUser inputs;};
       modules = [
         ./darwin/configuration.nix
         home-manager.darwinModules.home-manager
