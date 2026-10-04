@@ -67,6 +67,7 @@
       hax # oneshot agent (hax -p "…"), built via overlay from packages/hax.nix
       prismlauncher # Minecraft client launcher (official MS login, mod loaders)
       zoxide
+      discord
     ])
     ++ (
       # v4l2-ctl: scriptable camera controls — Linux-only (video4linux)
