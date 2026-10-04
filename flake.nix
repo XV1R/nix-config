@@ -20,6 +20,12 @@
     };
 
     nix-skills.url = "github:olafkfreund/nix-skills";
+
+    # Prebuilt nix-index database: powers comma and command-not-found
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -29,6 +35,7 @@
     nix-darwin,
     home-manager,
     nix-skills,
+    nix-index-database,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -52,20 +59,29 @@
         exec ${p.alejandra}/bin/alejandra "$@"
       '';
 
+    # Shared Home Manager wiring: one definition for every host, so a new
+    # sharedModule lands everywhere at once.
+    hmFor = user: home: {
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      sharedModules = [
+        nix-skills.homeManagerModules.default
+        nix-index-database.homeModules.nix-index
+      ];
+      users.${user} = {
+        imports = [./home.nix];
+        home.username = user;
+        home.homeDirectory = home;
+      };
+    };
+
     saturn = nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [
         ./configuration.nix
         home-manager.nixosModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.sharedModules = [nix-skills.homeManagerModules.default];
-          home-manager.users.xavier = {
-            imports = [./home.nix];
-            home.username = "xavier";
-            home.homeDirectory = "/home/xavier";
-          };
+          home-manager = hmFor "xavier" "/home/xavier";
         }
       ];
     };
@@ -77,14 +93,7 @@
         ./darwin/configuration.nix
         home-manager.darwinModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.sharedModules = [nix-skills.homeManagerModules.default];
-          home-manager.users.${macUser} = {
-            imports = [./home.nix];
-            home.username = macUser;
-            home.homeDirectory = "/Users/${macUser}";
-          };
+          home-manager = hmFor macUser "/Users/${macUser}";
         }
       ];
     };

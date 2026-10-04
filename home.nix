@@ -14,6 +14,7 @@
     ./programs/git
     ./programs/delta
     ./programs/gh
+    ./programs/nix-index
     ./programs/jujutsu
     ./programs/machine-report
   ];
