@@ -98,6 +98,9 @@
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  # Licensed Berkeley Mono copy (zip is gitignored)
+  fonts.packages = [(pkgs.callPackage ./fonts/berkeley-mono.nix {})];
+
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [

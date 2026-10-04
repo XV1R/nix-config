@@ -13,6 +13,7 @@
     ./programs/git
     ./programs/delta
     ./programs/jujutsu
+    ./programs/machine-report
   ];
   home.username = "xavier";
   home.homeDirectory = "/home/xavier";
@@ -32,6 +33,12 @@
 
   # Manages ~/.bashrc so home.shellAliases and zoxide's shell hook take effect.
   programs.bash.enable = true;
+
+  # System font: Berkeley Mono for the GNOME interface and monospace
+  dconf.settings."org/gnome/desktop/interface" = {
+    font-name = "Berkeley Mono 11";
+    monospace-font-name = "Berkeley Mono 11";
+  };
 
   # zoxide needs shell integration; this installs it and sets up the `z` hook.
   programs.zoxide.enable = true;
