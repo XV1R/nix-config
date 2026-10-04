@@ -50,118 +50,39 @@
 
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     nix-minecraft.inputs.nixpkgs.follows = "nixpkgs";
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = {
+  outputs = inputs @ {
     self,
-    nixpkgs,
-    nixpkgs-darwin,
-    nix-darwin,
-    home-manager,
-    nix-skills,
-    nix-index-database,
-    hax,
-    elephant,
-    walker,
-    microvm,
-    nix-minecraft,
+    flake-parts,
     ...
-  } @ inputs: let
-    system = "x86_64-linux";
-    darwinSystem = "aarch64-darwin";
-    pkgs = nixpkgs.legacyPackages.${system};
-    darwinPkgs = nixpkgs-darwin.legacyPackages.${darwinSystem};
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} (
+      {config, ...}: {
+        systems = [
+          "x86_64-linux"
+          "aarch64-darwin"
+        ];
 
-    # hax isn't in nixpkgs yet; build it from the locked flake input.
-    haxOverlay = final: prev: {
-      hax = final.callPackage ./packages/hax.nix {src = hax;};
-    };
+        imports = [./hosts.nix];
 
-    # TODO(mac): fill in from the laptop:
-    #   host: scutil --get LocalHostName
-    #   user: whoami
-    macHost = "workbook";
-    macUser = "work";
+        perSystem = {pkgs, ...}: {
+          # `nix fmt` runs alejandra over the tree. Bare `nix fmt` passes no
+          # arguments, which would make alejandra read stdin, so default to `.`.
+          formatter = pkgs.writeShellScriptBin "alejandra" ''
+            if [[ "$#" -eq 0 ]]; then
+              set -- .
+            fi
+            exec ${pkgs.alejandra}/bin/alejandra "$@"
+          '';
 
-    # `nix fmt` runs alejandra over the tree. Bare `nix fmt` passes no
-    # arguments, which would make alejandra read stdin, so default to `.`.
-    alejandraFmt = p:
-      p.writeShellScriptBin "alejandra" ''
-        if [[ "$#" -eq 0 ]]; then
-          set -- .
-        fi
-        exec ${p.alejandra}/bin/alejandra "$@"
-      '';
-
-    # Shared Home Manager wiring: one definition for every host, so a new
-    # sharedModule lands everywhere at once. extraModules lets a host add
-    # platform-specific modules (e.g. walker on saturn).
-    hmFor = user: home: extraModules: {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-      sharedModules =
-        [
-          nix-skills.homeManagerModules.default
-          nix-index-database.homeModules.nix-index
-        ]
-        ++ extraModules;
-      users.${user} = {
-        imports = [./home.nix];
-        home.username = user;
-        home.homeDirectory = home;
-      };
-    };
-
-    saturn = nixpkgs.lib.nixosSystem {
-      inherit system;
-      # Modules may declare {inputs, ...} to reach flake inputs
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./configuration.nix
-        microvm.nixosModules.host
-        ./microvms/host.nix
-        home-manager.nixosModules.home-manager
-        {
-          # Launcher modules are Linux-only: walker's upstream module plus
-          # our config, added on top of the shared set.
-          home-manager = hmFor "xavier" "/home/xavier" [
-            walker.homeManagerModules.default
-            ./programs/walker
-          ];
-          nixpkgs.overlays = [haxOverlay];
-          # Bare `nixpkgs#` references (incl. comma) resolve to the exact
-          # locked rev this system was built from.
-          nix.registry.nixpkgs.flake = nixpkgs;
-        }
-      ];
-    };
-
-    mac = nix-darwin.lib.darwinSystem {
-      system = darwinSystem;
-      specialArgs = {inherit macUser inputs;};
-      modules = [
-        ./darwin/configuration.nix
-        home-manager.darwinModules.home-manager
-        {
-          home-manager = hmFor macUser "/Users/${macUser}" [];
-          nixpkgs.overlays = [haxOverlay];
-        }
-      ];
-    };
-  in {
-    # Bare `nix build` / `nix eval` operate on the system closure
-    packages.${system}.default = saturn.config.system.build.toplevel;
-    packages.${darwinSystem}.default = mac.system;
-
-    formatter.${system} = alejandraFmt pkgs;
-    formatter.${darwinSystem} = alejandraFmt darwinPkgs;
-
-    nixosConfigurations.saturn = saturn;
-
-    # darwin-rebuild resolves the attr from the Mac's LocalHostName; the
-    # `mac` alias lets us build and validate from saturn before the real
-    # name is filled in.
-    darwinConfigurations.${macHost} = mac;
-    darwinConfigurations.mac = mac;
-  };
+          packages.default =
+            if pkgs.stdenv.isLinux
+            then config.flake.nixosConfigurations.saturn.config.system.build.toplevel
+            else config.flake.darwinConfigurations.mac.system;
+        };
+      }
+    );
 }
