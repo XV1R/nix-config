@@ -48,7 +48,7 @@
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
         name = "walker";
         command = "${config.home.profileDirectory}/bin/walker";
-        binding = "<Super>space";
+        binding = "<Super>BackSpace";
       };
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
         name = "ask hax";
