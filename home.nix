@@ -12,6 +12,7 @@
     ./programs/helix
     ./programs/git
     ./programs/delta
+    ./programs/gh
     ./programs/jujutsu
     ./programs/machine-report
   ];
@@ -56,6 +57,7 @@
     glow
     v4l-utils # v4l2-ctl: scriptable camera controls
     zoxide
+    shadow # lastlog, used by ~/.machine_report.sh
   ];
 
   home.shellAliases = {
