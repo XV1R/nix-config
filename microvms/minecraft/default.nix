@@ -76,7 +76,11 @@
       autoStart = true;
       # NOTE: not pkgs.minecraftServers.paperServers — nix-minecraft's
       # minecraftServers merge list doesn't include the paper tree.
-      package = pkgs.paperServers.paper;
+      # NOTE: not pkgs.minecraftServers.paperServers — nix-minecraft's
+      # minecraftServers merge list doesn't include the paper tree.
+      # Pinned explicitly: the rolling `paper` attr mis-sorts and resolved
+      # to 26.3-rc3 (stale pre-release) even though stable builds exist.
+      package = pkgs.paperServers.paper-26_3-build_49;
       jvmOpts = "-Xms2G -Xmx3G";
       serverProperties = {
         server-port = 25565;
