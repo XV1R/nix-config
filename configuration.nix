@@ -28,6 +28,13 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # The RTL8125 2.5G NIC (enp42s0) flaps its link when Energy-Efficient
+  # Ethernet is enabled (OS-independent: happens on Windows too). Keep EEE off
+  # whenever the interface appears.
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="net", DRIVERS=="r8169", ATTR{address}=="d8:bb:c1:e1:43:43", RUN+="${pkgs.ethtool}/bin/ethtool --set-eee $kernel eee off"
+  '';
+
   # Set your time zone.
   time.timeZone = "America/New_York";
 
