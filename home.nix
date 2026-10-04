@@ -3,6 +3,7 @@
 # Never run `home-manager switch` directly.
 {
   config,
+  lib,
   pkgs,
   ...
 }: {
@@ -16,8 +17,8 @@
     ./programs/jujutsu
     ./programs/machine-report
   ];
-  home.username = "xavier";
-  home.homeDirectory = "/home/xavier";
+  # username/homeDirectory are per-host: set in flake.nix for saturn and the
+  # Mac, since the work account name differs.
   home.stateVersion = "26.05";
 
   programs.home-manager.enable = true;
@@ -35,29 +36,36 @@
   # Manages ~/.bashrc so home.shellAliases and zoxide's shell hook take effect.
   programs.bash.enable = true;
 
-  # System font: Berkeley Mono for the GNOME interface and monospace
-  dconf.settings."org/gnome/desktop/interface" = {
-    font-name = "Berkeley Mono 11";
-    monospace-font-name = "Berkeley Mono 11";
+  # System font: Berkeley Mono for the GNOME interface and monospace.
+  # GNOME/dconf does not exist on the Mac.
+  dconf.settings = lib.mkIf pkgs.stdenv.isLinux {
+    "org/gnome/desktop/interface" = {
+      font-name = "Berkeley Mono 11";
+      monospace-font-name = "Berkeley Mono 11";
+    };
   };
 
   # zoxide needs shell integration; this installs it and sets up the `z` hook.
   programs.zoxide.enable = true;
 
-  home.packages = with pkgs; [
-    eza
-    fd
-    dust
-    just
-    jq
-    btop
-    procs
-    prettyping
-    tokei
-    glow
-    v4l-utils # v4l2-ctl: scriptable camera controls
-    zoxide
-  ];
+  home.packages =
+    (with pkgs; [
+      eza
+      fd
+      dust
+      just
+      jq
+      btop
+      procs
+      prettyping
+      tokei
+      glow
+      zoxide
+    ])
+    ++ (
+      # v4l2-ctl: scriptable camera controls — Linux-only (video4linux)
+      lib.optionals pkgs.stdenv.isLinux (with pkgs; [v4l-utils])
+    );
 
   home.shellAliases = {
     ls = "eza --group-directories-first";

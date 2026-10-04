@@ -1,0 +1,27 @@
+# nix-darwin configuration for the work MacBook (aarch64).
+# The host/user placeholders live in flake.nix (macHost / macUser); this
+# module receives macUser via specialArgs so there is one source of truth.
+{
+  config,
+  pkgs,
+  macUser,
+  ...
+}: {
+  nixpkgs.hostPlatform = "aarch64-darwin";
+
+  # Fresh nix-darwin install on this release — do not change after bootstrapping.
+  system.stateVersion = 6;
+
+  # nix-darwin owns the Nix installation regardless of which installer
+  # bootstrapped the machine; keep flakes enabled either way.
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  # Home Manager (wired in flake.nix) needs the user's home path.
+  users.users.${macUser}.home = "/Users/${macUser}";
+
+  # Declarative devenv CLI — replaces the imperative `nix profile install`.
+  # Project-level devenv.nix files in work repos are untouched by this.
+  environment.systemPackages = [
+    pkgs.devenv
+  ];
+}
