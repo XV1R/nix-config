@@ -61,6 +61,7 @@
       prettyping
       tokei
       glow
+      statix # nix linter; alejandra formats, statix finds antipatterns
       zoxide
     ])
     ++ (
