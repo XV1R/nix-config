@@ -21,7 +21,10 @@
 
   # Declarative devenv CLI — replaces the imperative `nix profile install`.
   # Project-level devenv.nix files in work repos are untouched by this.
+  # nh covers `nh darwin switch` / `nh clean` on this side too.
+  environment.variables.NH_FLAKE = "/Users/${macUser}/config";
   environment.systemPackages = [
     pkgs.devenv
+    pkgs.nh
   ];
 }
