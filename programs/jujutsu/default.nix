@@ -1,12 +1,11 @@
-{config, ...}:
-let gitUser = config.programs.git.settings.user;
-in {
+{config, ...}: {
   programs.jujutsu = {
     enable = true;
-    user.name = gitUser.name;
-    user.email = gitUser.email;
     settings = {
-      aliases.g = [ "git" ];
+      user = {
+        inherit (config.var.git) name email;
+      };
+      aliases.g = ["git"];
       ui.editor = "hx";
     };
   };
