@@ -1,0 +1,146 @@
+# Qt Creator Dark color scheme for Helix
+# Ported from: qt-creator/share/qtcreator/styles/creator-dark.xml
+# UI palette from: qt-creator/share/qtcreator/themes/flat-dark.creatortheme
+# Save to: ~/.config/helix/themes/qt_creator_dark.toml
+
+# --- Syntax Highlighting ---
+# Mapped from the official creator-dark.xml style definitions
+
+# Keyword: #45c6d6 italic
+"keyword" = { fg = "#45c6d6", modifiers = ["italic"] }
+"keyword.control" = { fg = "#45c6d6", modifiers = ["italic"] }
+"keyword.function" = { fg = "#45c6d6", modifiers = ["italic"] }
+"keyword.operator" = { fg = "#45c6d6", modifiers = ["italic"] }
+"keyword.return" = { fg = "#45c6d6", modifiers = ["italic"] }
+"keyword.storage" = { fg = "#45c6d6", modifiers = ["italic"] }
+"keyword.directive" = { fg = "#ff6aad" }       # Preprocessor
+
+# Type: #ff8080  |  PrimitiveType: #d69aa7
+"type" = { fg = "#ff8080" }
+"type.builtin" = { fg = "#d69aa7" }
+"type.enum" = { fg = "#ff8080" }
+"type.parameter" = { fg = "#ff8080" }
+
+"constructor" = { fg = "#ff8080" }
+
+# Function/Macro: inherits Text (no special color in Qt Creator)
+"function" = { fg = "#d6cf9a" }
+"function.builtin" = { fg = "#d6cf9a" }
+"function.method" = { fg = "#d6cf9a" }
+"function.macro" = { fg = "#d6cf9a" }
+
+# String: #d69545
+"string" = { fg = "#d69545" }
+"string.special" = { fg = "#d69545" }
+"string.regexp" = { fg = "#d69545" }
+
+# Comment: #a8abb0 italic  |  Doxygen.Comment: #65676a bold italic
+"comment" = { fg = "#a8abb0", modifiers = ["italic"] }
+"comment.line" = { fg = "#a8abb0", modifiers = ["italic"] }
+"comment.block" = { fg = "#a8abb0", modifiers = ["italic"] }
+"comment.block.documentation" = { fg = "#65676a", modifiers = ["bold", "italic"] }
+
+# Number: #8a602c
+"constant" = { fg = "#8a602c" }
+"constant.numeric" = { fg = "#8a602c" }
+"constant.character" = { fg = "#d69545" }
+"constant.character.escape" = { fg = "#d69545" }
+"constant.builtin" = { fg = "#45c6d6", modifiers = ["italic"] }
+
+# Local/Parameter: #d6bb9a  |  Global: #9aa7d6
+"variable" = { fg = "#d6bb9a" }
+"variable.builtin" = { fg = "#9aa7d6" }
+"variable.parameter" = { fg = "#d6bb9a" }
+"variable.other.member" = { fg = "#d6cf9a" }   # Field: inherits Text
+
+# Label: #d6c540
+"label" = { fg = "#d6c540" }
+
+# Punctuation: inherits Text
+"punctuation" = { fg = "#d6cf9a" }
+"punctuation.delimiter" = { fg = "#d6cf9a" }
+"punctuation.bracket" = { fg = "#d6cf9a" }
+"punctuation.special" = { fg = "#ff6aad" }      # Preprocessor-adjacent
+
+# Operator: #d6bb9a
+"operator" = { fg = "#d6bb9a" }
+
+# Attribute: #45c6d6 italic (same as Keyword)
+"attribute" = { fg = "#45c6d6", modifiers = ["italic"] }
+
+# Global: #9aa7d6
+"namespace" = { fg = "#9aa7d6" }
+
+"special" = { fg = "#ff6aad" }                  # Preprocessor
+
+# Static: #66a334 italic
+"markup.heading" = { fg = "#d6c540", modifiers = ["bold"] }
+"markup.bold" = { modifiers = ["bold"] }
+"markup.italic" = { modifiers = ["italic"] }
+"markup.link.url" = { fg = "#d6c540", modifiers = ["underlined"] }
+"markup.raw" = { fg = "#d69545" }
+
+"tag" = { fg = "#45c6d6", modifiers = ["italic"] }
+"tag.attribute" = { fg = "#d69aa7" }
+
+# Diff colors from creator-dark.xml
+"diff.plus" = { fg = "#45c6d6" }               # AddedLine
+"diff.minus" = { fg = "#d65645" }              # RemovedLine
+"diff.delta" = { fg = "#66a334" }              # DiffFile
+
+# --- UI Elements ---
+# From flat-dark.creatortheme palette
+
+"ui.background" = { bg = "#2e2f30" }           # Text background
+"ui.text" = { fg = "#d6cf9a" }                 # Text foreground
+"ui.text.focus" = { fg = "#f0f0f0" }           # textHighlighted
+"ui.text.info" = { fg = "#d0d0d0" }
+
+"ui.cursor" = { fg = "#2e2f30", bg = "#d6cf9a" }
+"ui.cursor.primary" = { fg = "#2e2f30", bg = "#d6cf9a" }
+"ui.cursor.match" = { bg = "#1d545c" }         # Parentheses background
+
+"ui.cursorline.primary" = { bg = "#373737" }   # CurrentLine
+
+"ui.selection" = { bg = "#1d545c" }            # Selection background
+"ui.selection.primary" = { bg = "#1d545c" }
+
+"ui.linenr" = { fg = "#bec0c2", bg = "#404244" }   # LineNumber
+"ui.linenr.selected" = { fg = "#d6c540", modifiers = ["bold"] }  # CurrentLineNumber
+
+"ui.statusline" = { fg = "#d0d0d0", bg = "#404142" }
+"ui.statusline.inactive" = { fg = "#808080", bg = "#353637" }
+"ui.statusline.normal" = { fg = "#d0d0d0", bg = "#404142" }
+"ui.statusline.insert" = { fg = "#2e2f30", bg = "#66a334" }
+"ui.statusline.select" = { fg = "#2e2f30", bg = "#45c6d6" }
+
+"ui.popup" = { fg = "#d0d0d0", bg = "#353637" }
+"ui.popup.info" = { fg = "#d0d0d0", bg = "#353637" }
+
+"ui.menu" = { fg = "#d0d0d0", bg = "#353637" }
+"ui.menu.selected" = { fg = "#bec0c2", bg = "#1d545c" }
+"ui.menu.scroll" = { fg = "#bec0c2", bg = "#404244" }
+
+"ui.window" = { fg = "#404142" }               # splitter
+
+"ui.help" = { fg = "#d0d0d0", bg = "#353637" }
+
+"ui.virtual.whitespace" = { fg = "#4c4d50" }   # VisualWhitespace
+"ui.virtual.ruler" = { fg = "#404244" }
+"ui.virtual.indent-guide" = { fg = "#4c4d50" }
+"ui.virtual.wrap" = { fg = "#4c4d50" }
+
+"ui.bufferline" = { fg = "#bec0c2", bg = "#353637" }
+"ui.bufferline.active" = { fg = "#d6cf9a", bg = "#2e2f30", modifiers = ["bold"] }
+"ui.bufferline.background" = { bg = "#2e2f30" }
+
+# Diagnostics from creator-dark.xml
+"diagnostic.error" = { underline = { style = "line", color = "#d65645" } }
+"diagnostic.warning" = { underline = { style = "line", color = "#d6c545" } }
+"diagnostic.info" = { underline = { style = "dash", color = "#b6aef1" } }
+"diagnostic.hint" = { underline = { style = "dotted", color = "#b6aef1" } }
+
+"error" = { fg = "#df4f4f" }
+"warning" = { fg = "#ecbc1c" }
+"info" = { fg = "#4f8fff" }
+"hint" = { fg = "#b6aef1" }
