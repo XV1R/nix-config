@@ -17,6 +17,8 @@
     ./programs/nix-index
     ./programs/jujutsu
     ./programs/machine-report
+    # programs/walker is saturn-only and imported via flake.nix extraModules
+    # (conditional imports based on config cause infinite recursion)
   ];
   # username/homeDirectory are per-host: set in flake.nix for saturn and the
   # Mac, since the work account name differs.

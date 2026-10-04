@@ -33,6 +33,16 @@
       url = "github:OleksandrChekhovskyi/hax";
       flake = false;
     };
+
+    # Launcher: walker (frontend) + elephant (provider daemon). Imported for
+    # their Home Manager modules; walker's package comes from nixpkgs, while
+    # elephant uses the flake's elephant-with-providers (nixpkgs ships the
+    # daemon without providers).
+    elephant.url = "github:abenz1267/elephant";
+    walker = {
+      url = "github:abenz1267/walker";
+      inputs.elephant.follows = "elephant";
+    };
   };
 
   outputs = {
@@ -44,6 +54,8 @@
     nix-skills,
     nix-index-database,
     hax,
+    elephant,
+    walker,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -73,14 +85,17 @@
       '';
 
     # Shared Home Manager wiring: one definition for every host, so a new
-    # sharedModule lands everywhere at once.
-    hmFor = user: home: {
+    # sharedModule lands everywhere at once. extraModules lets a host add
+    # platform-specific modules (e.g. walker on saturn).
+    hmFor = user: home: extraModules: {
       useGlobalPkgs = true;
       useUserPackages = true;
-      sharedModules = [
-        nix-skills.homeManagerModules.default
-        nix-index-database.homeModules.nix-index
-      ];
+      sharedModules =
+        [
+          nix-skills.homeManagerModules.default
+          nix-index-database.homeModules.nix-index
+        ]
+        ++ extraModules;
       users.${user} = {
         imports = [./home.nix];
         home.username = user;
@@ -94,7 +109,12 @@
         ./configuration.nix
         home-manager.nixosModules.home-manager
         {
-          home-manager = hmFor "xavier" "/home/xavier";
+          # Launcher modules are Linux-only: walker's upstream module plus
+          # our config, added on top of the shared set.
+          home-manager = hmFor "xavier" "/home/xavier" [
+            walker.homeManagerModules.default
+            ./programs/walker
+          ];
           nixpkgs.overlays = [haxOverlay];
           # Bare `nixpkgs#` references (incl. comma) resolve to the exact
           # locked rev this system was built from.
@@ -110,7 +130,7 @@
         ./darwin/configuration.nix
         home-manager.darwinModules.home-manager
         {
-          home-manager = hmFor macUser "/Users/${macUser}";
+          home-manager = hmFor macUser "/Users/${macUser}" [];
           nixpkgs.overlays = [haxOverlay];
         }
       ];
