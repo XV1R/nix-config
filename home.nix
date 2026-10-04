@@ -8,6 +8,7 @@
 }: {
   imports = [
     ./programs/opencode
+    ./programs/delta
   ];
   home.username = "xavier";
   home.homeDirectory = "/home/xavier";
