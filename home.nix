@@ -62,6 +62,7 @@
     tokei
     glow
     v4l-utils # v4l2-ctl: scriptable camera controls
+    zoxide
   ];
 
   home.shellAliases = {
@@ -73,5 +74,6 @@
     pgrep = "procs --pgrep";
     ping = "prettyping --nolegend";
     md = "glow";
+    c = "z";
   };
 }
