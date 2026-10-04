@@ -1,5 +1,4 @@
-{ lib, ...}: {
-  
+{lib, ...}: {
   # - context: global rules, written to ~/.config/opencode/AGENTS.md (auto-read by opencode)
   # - agents:  agent definitions, written to ~/.config/opencode/agents/
   programs.opencode = {

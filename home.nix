@@ -12,6 +12,7 @@
     ./programs/git
     ./programs/delta
     ./programs/jujutsu
+    ./programs/fzf
   ];
   home.username = "xavier";
   home.homeDirectory = "/home/xavier";
