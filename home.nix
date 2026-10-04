@@ -68,6 +68,7 @@
       prismlauncher # Minecraft client launcher (official MS login, mod loaders)
       zoxide
       discord
+      steam
     ])
     ++ (
       # v4l2-ctl: scriptable camera controls — Linux-only (video4linux)
