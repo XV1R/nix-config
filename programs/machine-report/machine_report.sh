@@ -296,23 +296,23 @@ else
     disk_percent=$(awk -v used="$root_used" -v total="$root_total" 'BEGIN { printf "%.2f", (used / total) * 100 }')
 fi
 
-# Last login and Uptime
-last_login=$(lastlog -u "$USER")
-last_login_ip=$(echo "$last_login" | awk 'NR==2 {print $3}')
+# Last login (via util-linux `last`; shadow's lastlog is unavailable on NixOS)
+last_login=$(last -1 "$USER" 2>/dev/null)
+last_login_user=$(echo "$last_login" | awk 'NR==1 {print $1}')
+last_login_ip=$(echo "$last_login" | awk 'NR==1 {print $3}')
 
-# Check if last_login_ip is an IP address
-if [[ "$last_login_ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-    last_login_ip_present=1
-    last_login_time=$(echo "$last_login" | awk 'NR==2 {print $6, $7, $10, $8}')
-else
-    last_login_time=$(echo "$last_login" | awk 'NR==2 {print $4, $5, $8, $6}')
-    # Check for **Never logged in** edge case
-    if [ "$last_login_time" = "in**" ]; then
-        last_login_time="Never logged in"
+# `last` prints only "wtmp begins ..." when there is no prior session
+if [ -n "$last_login_user" ] && [ "$last_login_user" != "wtmp" ]; then
+    if [[ "$last_login_ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+        last_login_ip_present=1
     fi
+    last_login_time=$(echo "$last_login" | awk 'NR==1 {print $4, $5, $6, $7}')
+else
+    last_login_time="Never logged in"
 fi
 
-sys_uptime=$(uptime -p | sed 's/up\s*//; s/\s*day\(s*\)/d/; s/\s*hour\(s*\)/h/; s/\s*minute\(s*\)/m/')
+# GNU coreutils' uptime lacks procps' -p; parse /proc/uptime instead
+sys_uptime=$(awk '{printf "%dd %dh %dm", int($1/86400), int($1%86400/3600), int($1%3600/60)}' /proc/uptime)
 
 # Set current length before graphs get calculated
 set_current_len

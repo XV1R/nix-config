@@ -57,7 +57,6 @@
     glow
     v4l-utils # v4l2-ctl: scriptable camera controls
     zoxide
-    shadow # lastlog, used by ~/.machine_report.sh
   ];
 
   home.shellAliases = {
