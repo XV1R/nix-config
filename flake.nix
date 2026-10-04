@@ -26,6 +26,13 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Oneshot agent (hax -p "…"): source pin for our package in packages/.
+    # The repo has no flake.nix — it is a plain source pin.
+    hax = {
+      url = "github:OleksandrChekhovskyi/hax";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -36,12 +43,18 @@
     home-manager,
     nix-skills,
     nix-index-database,
+    hax,
     ...
   } @ inputs: let
     system = "x86_64-linux";
     darwinSystem = "aarch64-darwin";
     pkgs = nixpkgs.legacyPackages.${system};
     darwinPkgs = nixpkgs-darwin.legacyPackages.${darwinSystem};
+
+    # hax isn't in nixpkgs yet; build it from the locked flake input.
+    haxOverlay = final: prev: {
+      hax = final.callPackage ./packages/hax.nix {src = hax;};
+    };
 
     # TODO(mac): fill in from the laptop:
     #   host: scutil --get LocalHostName
@@ -82,6 +95,7 @@
         home-manager.nixosModules.home-manager
         {
           home-manager = hmFor "xavier" "/home/xavier";
+          nixpkgs.overlays = [haxOverlay];
           # Bare `nixpkgs#` references (incl. comma) resolve to the exact
           # locked rev this system was built from.
           nix.registry.nixpkgs.flake = nixpkgs;
@@ -97,6 +111,7 @@
         home-manager.darwinModules.home-manager
         {
           home-manager = hmFor macUser "/Users/${macUser}";
+          nixpkgs.overlays = [haxOverlay];
         }
       ];
     };

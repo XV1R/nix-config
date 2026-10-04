@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "hax": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790973115,
+        "narHash": "sha256-sILcRwUttW99HrwiE5NjAgbyiTR0xE9A9ewziMqWLeg=",
+        "owner": "OleksandrChekhovskyi",
+        "repo": "hax",
+        "rev": "95225233cc34ec2c74931c104076468c553c022e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "OleksandrChekhovskyi",
+        "repo": "hax",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -153,6 +169,7 @@
     },
     "root": {
       "inputs": {
+        "hax": "hax",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",
