@@ -44,6 +44,7 @@
           '';
           home.sessionVariables.BUN_INSTALL = "$HOME/.bun";
           home.shellAliases.vim = "nvim";
+          programs.helix.settings.theme = "qt_creator_dark";
 
           programs.zsh.initContent = lib.mkMerge [
             # Before compinit (order 570) so Docker's completions are found
