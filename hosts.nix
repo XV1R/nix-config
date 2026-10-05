@@ -61,6 +61,7 @@ in {
           ./modules/walker
           ./modules/gnome.nix
           ./modules/machine-report
+          ./modules/bitwarden.nix
           ./modules/discord.nix
           ./modules/prismlauncher.nix
         ];
