@@ -7,7 +7,7 @@ in {
     imports = [
       homeManager.identity
       homeManager.nix-skills
-      ../legacy/nix-index.nix
+      homeManager.nix-index
       homeManager.opencode
       homeManager.helix
       homeManager.git
