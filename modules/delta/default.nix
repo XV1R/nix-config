@@ -7,6 +7,8 @@
       options = {
         navigate = true;
         dark = true;
+        line-numbers = true;
+        hyperlinks = true;
       };
     };
   };
