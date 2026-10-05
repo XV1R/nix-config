@@ -17,6 +17,9 @@ in {
     # zoxide's shell hook provides `z` (and the `c` alias below).
     programs.zoxide.enable = true;
 
+    # Ctrl-R history search, Ctrl-T file picker, ** completion
+    programs.fzf.enable = true;
+
     home.sessionPath = ["$HOME/.local/bin"];
 
     # Tools called by the aliases
