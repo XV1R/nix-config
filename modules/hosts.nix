@@ -43,6 +43,7 @@ in {
       nixos.home-manager
       nixos.hax
       nixos.nix
+      nixos.nh
       {
         # Host appends: system-level features go in modules; user-level
         # features (walker, gnome, machine-report, discord, …) go in the

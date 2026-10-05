@@ -14,6 +14,7 @@ in {
       homeManager.delta
       homeManager.gh
       homeManager.jujutsu
+      homeManager.nh
     ];
     # username/homeDirectory are per-host: set in each host's user.
     home.stateVersion = "26.05";

@@ -100,19 +100,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # nh: rebuilds with a derivation diff and confirmation prompt, plus a
-  # weekly garbage collection with retention. Agents keep using plain
-  # nixos-rebuild per the machine rules in opencode/AGENTS.md.
-  programs.nh = {
-    enable = true;
-    flake = "/home/xavier/config";
-    clean = {
-      enable = true;
-      dates = "weekly";
-      extraArgs = "--keep-since 4d --keep 5";
-    };
-  };
-
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
