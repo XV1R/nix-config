@@ -13,7 +13,7 @@ in {
       homeManager.git
       homeManager.delta
       homeManager.gh
-      ../legacy/jujutsu
+      homeManager.jujutsu
     ];
     # username/homeDirectory are per-host: set in each host's user.
     home.stateVersion = "26.05";
