@@ -52,7 +52,7 @@ in {
             inputs.walker.homeManagerModules.default
             ../legacy/walker
             homeManager.gnome
-            ../legacy/machine-report
+            homeManager.machine-report
             ../legacy/bitwarden.nix
             ../legacy/discord.nix
             ../legacy/prismlauncher.nix
