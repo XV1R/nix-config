@@ -4,22 +4,13 @@
 {
   config,
   pkgs,
-  inputs,
   macUser,
   ...
 }: {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-  # Bare `nixpkgs#` references (incl. comma) resolve to the exact locked
-  # rev this system was built from (the darwin branch).
-  nix.registry.nixpkgs.flake = inputs.nixpkgs-darwin;
-
   # Fresh nix-darwin install on this release — do not change after bootstrapping.
   system.stateVersion = 6;
-
-  # nix-darwin owns the Nix installation regardless of which installer
-  # bootstrapped the machine; keep flakes enabled either way.
-  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Home Manager (wired in flake.nix) needs the user's home path.
   users.users.${macUser}.home = "/Users/${macUser}";

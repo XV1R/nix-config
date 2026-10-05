@@ -99,7 +99,6 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # nh: rebuilds with a derivation diff and confirmation prompt, plus a
   # weekly garbage collection with retention. Agents keep using plain

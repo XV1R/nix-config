@@ -19,6 +19,7 @@
       ../darwin/configuration.nix
       darwin.home-manager
       darwin.hax
+      darwin.nix
       {
         home-manager.users.${macUser} = {
           imports = [homeManager.base homeManager.hax];
@@ -41,6 +42,7 @@ in {
       nixos.minecraft
       nixos.home-manager
       nixos.hax
+      nixos.nix
       {
         # Host appends: system-level features go in modules; user-level
         # features (walker, gnome, machine-report, discord, …) go in the
@@ -59,9 +61,6 @@ in {
           home.username = "xavier";
           home.homeDirectory = "/home/xavier";
         };
-        # Bare `nixpkgs#` references (incl. comma) resolve to the exact
-        # locked rev this system was built from.
-        nix.registry.nixpkgs.flake = inputs.nixpkgs;
       }
     ];
   };
