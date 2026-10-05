@@ -8,7 +8,7 @@ in {
       homeManager.identity
       ../legacy/nix-skills.nix
       ../legacy/nix-index.nix
-      ../legacy/opencode
+      homeManager.opencode
       homeManager.helix
       homeManager.git
       homeManager.delta
