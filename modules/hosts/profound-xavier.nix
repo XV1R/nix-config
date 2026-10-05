@@ -14,6 +14,7 @@
       darwin.hax
       darwin.nix
       darwin.shell
+      darwin.homebrew
       ({pkgs, ...}: {
         nixpkgs.hostPlatform = "aarch64-darwin";
 
