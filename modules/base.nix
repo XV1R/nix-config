@@ -9,7 +9,7 @@ in {
       ../legacy/nix-skills.nix
       ../legacy/nix-index.nix
       ../legacy/opencode
-      ../legacy/helix
+      homeManager.helix
       homeManager.git
       homeManager.delta
       homeManager.gh
