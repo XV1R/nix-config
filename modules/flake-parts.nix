@@ -1,5 +1,12 @@
 # Flake-wide settings: supported systems, formatter and default package.
-{config, ...}: {
+{
+  config,
+  inputs,
+  ...
+}: {
+  # Enables flake.modules.<class>.<name>: the per-feature modules in this tree
+  imports = [inputs.flake-parts.flakeModules.modules];
+
   systems = [
     "x86_64-linux"
     "aarch64-darwin"
