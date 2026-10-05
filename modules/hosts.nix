@@ -51,7 +51,7 @@ in {
             homeManager.hax
             inputs.walker.homeManagerModules.default
             ../legacy/walker
-            ../legacy/gnome.nix
+            homeManager.gnome
             ../legacy/machine-report
             ../legacy/bitwarden.nix
             ../legacy/discord.nix
