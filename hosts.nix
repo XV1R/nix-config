@@ -22,11 +22,9 @@
     };
   };
 
-  # TODO(mac): fill in from the laptop:
-  #   host: scutil --get LocalHostName
-  #   user: whoami
-  macHost = "workbook";
-  macUser = "work";
+  # Work laptop's LocalHostName and account name.
+  macHost = "Profound-xavier";
+  macUser = "xavier-profound";
 
   mac = inputs.nix-darwin.lib.darwinSystem {
     system = "aarch64-darwin";
@@ -75,6 +73,6 @@ in {
 
   flake.darwinConfigurations.${macHost} = mac;
 
-  # Alias so the Mac can be built before the real hostname is known.
+  # Short alias for explicitly targeting the Mac configuration.
   flake.darwinConfigurations.mac = mac;
 }
