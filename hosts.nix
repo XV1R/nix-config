@@ -60,6 +60,7 @@ in {
           inputs.walker.homeManagerModules.default
           ./modules/walker
           ./modules/gnome.nix
+          ./modules/mangohud.nix
           ./modules/machine-report
           ./modules/bitwarden.nix
           ./modules/discord.nix
