@@ -21,6 +21,18 @@ in {
       # Terminal.app integration (session restore, working directory)
       [ -r "/etc/zshrc_$TERM_PROGRAM" ] && . "/etc/zshrc_$TERM_PROGRAM"
     '';
+    environment.extraInit = ''
+      for f in /etc/paths /etc/paths.d/*; do
+        [ -r "$f" ] || continue
+        while IFS= read -r p; do
+          case ":$PATH:" in
+            *":$p:"*) ;;
+            *) [ -n "$p" ] && PATH="$PATH:$p" ;;
+          esac
+        done < "$f"
+      done
+      unset f p
+    '';
     programs.zsh.loginShellInit = ''
       if [ -z "$LANG" ]; then
         export LANG=C.UTF-8
