@@ -1,5 +1,11 @@
 {
-  flake.modules.homeManager.delta = {...}: {
+  flake.modules.homeManager.delta = {
+    config,
+    lib,
+    ...
+  }: {
+    programs.git.settings.core.pager = lib.getExe config.programs.delta.package;
+
     programs.delta = {
       enable = true;
       enableGitIntegration = true;
