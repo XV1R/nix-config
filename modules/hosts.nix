@@ -6,12 +6,7 @@
   inputs,
   ...
 }: let
-  inherit (config.flake.modules) darwin nixos;
-
-  # hax isn't in nixpkgs yet; build it from the locked flake input.
-  haxOverlay = final: prev: {
-    hax = final.callPackage ../packages/hax.nix {src = inputs.hax;};
-  };
+  inherit (config.flake.modules) darwin homeManager nixos;
 
   # Work laptop's LocalHostName and account name.
   macHost = "Profound-xavier";
@@ -23,13 +18,13 @@
     modules = [
       ../darwin/configuration.nix
       darwin.home-manager
+      darwin.hax
       {
         home-manager.users.${macUser} = {
-          imports = [../home.nix];
+          imports = [../home.nix homeManager.hax];
           home.username = macUser;
           home.homeDirectory = "/Users/${macUser}";
         };
-        nixpkgs.overlays = [haxOverlay];
       }
     ];
   };
@@ -45,6 +40,7 @@ in {
       inputs.microvm.nixosModules.host
       ../microvms/host.nix
       nixos.home-manager
+      nixos.hax
       {
         # Host appends: system-level features go in modules; user-level
         # features (walker, gnome, machine-report, discord, …) go in the
@@ -52,6 +48,7 @@ in {
         home-manager.users.xavier = {
           imports = [
             ../home.nix
+            homeManager.hax
             inputs.walker.homeManagerModules.default
             ../legacy/walker
             ../legacy/gnome.nix
@@ -63,7 +60,6 @@ in {
           home.username = "xavier";
           home.homeDirectory = "/home/xavier";
         };
-        nixpkgs.overlays = [haxOverlay];
         # Bare `nixpkgs#` references (incl. comma) resolve to the exact
         # locked rev this system was built from.
         nix.registry.nixpkgs.flake = inputs.nixpkgs;
