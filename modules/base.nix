@@ -11,7 +11,7 @@ in {
       ../legacy/opencode
       ../legacy/helix
       homeManager.git
-      ../legacy/delta
+      homeManager.delta
       ../legacy/gh
       ../legacy/jujutsu
     ];
