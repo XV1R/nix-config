@@ -16,6 +16,7 @@
       darwin.shell
       darwin.homebrew
       darwin.devenv
+      darwin.profound
       {
         nixpkgs.hostPlatform = "aarch64-darwin";
 
