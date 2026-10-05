@@ -12,7 +12,7 @@ in {
       ../legacy/helix
       homeManager.git
       homeManager.delta
-      ../legacy/gh
+      homeManager.gh
       ../legacy/jujutsu
     ];
     # username/homeDirectory are per-host: set in each host's user.
