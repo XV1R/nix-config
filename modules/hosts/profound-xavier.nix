@@ -27,7 +27,7 @@
         environment.systemPackages = [pkgs.devenv];
 
         home-manager.users.${user} = {
-          imports = [homeManager.base homeManager.hax];
+          imports = [homeManager.base homeManager.hax homeManager.starship];
           home.username = user;
           home.homeDirectory = "/Users/${user}";
         };
