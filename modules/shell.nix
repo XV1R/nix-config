@@ -21,6 +21,8 @@ in {
       # Terminal.app integration (session restore, working directory)
       [ -r "/etc/zshrc_$TERM_PROGRAM" ] && . "/etc/zshrc_$TERM_PROGRAM"
     '';
+    # path_helper's /etc/paths(.d) entries, appended: path_helper itself
+    # would move the system directories ahead of Nix
     environment.extraInit = ''
       for f in /etc/paths /etc/paths.d/*; do
         [ -r "$f" ] || continue
