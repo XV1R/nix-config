@@ -54,7 +54,7 @@ in {
             homeManager.gnome
             homeManager.machine-report
             homeManager.bitwarden
-            ../legacy/discord.nix
+            homeManager.discord
             ../legacy/prismlauncher.nix
           ];
           home.username = "xavier";
