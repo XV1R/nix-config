@@ -8,14 +8,14 @@
 }: {
   imports = [
     ./vars.nix
-    ./modules/nix-skills.nix
-    ./modules/nix-index.nix
-    ./modules/opencode
-    ./modules/helix
-    ./modules/git
-    ./modules/delta
-    ./modules/gh
-    ./modules/jujutsu
+    ./legacy/nix-skills.nix
+    ./legacy/nix-index.nix
+    ./legacy/opencode
+    ./legacy/helix
+    ./legacy/git
+    ./legacy/delta
+    ./legacy/gh
+    ./legacy/jujutsu
     # Per-host modules (walker, gnome, machine-report, …) are appended in
     # hosts.nix via extraModules.
   ];

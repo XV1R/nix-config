@@ -4,7 +4,7 @@
 {inputs, ...}: let
   # hax isn't in nixpkgs yet; build it from the locked flake input.
   haxOverlay = final: prev: {
-    hax = final.callPackage ./packages/hax.nix {src = inputs.hax;};
+    hax = final.callPackage ../packages/hax.nix {src = inputs.hax;};
   };
 
   # Shared Home Manager wiring: one definition for every host. home.nix is
@@ -16,7 +16,7 @@
     extraSpecialArgs = {inherit inputs;};
     sharedModules = extraModules;
     users.${user} = {
-      imports = [./home.nix];
+      imports = [../home.nix];
       home.username = user;
       home.homeDirectory = home;
     };
@@ -30,7 +30,7 @@
     system = "aarch64-darwin";
     specialArgs = {inherit macUser inputs;};
     modules = [
-      ./darwin/configuration.nix
+      ../darwin/configuration.nix
       inputs.home-manager.darwinModules.home-manager
       {
         home-manager = hmFor macUser "/Users/${macUser}" [];
@@ -44,11 +44,11 @@ in {
     # Modules may declare {inputs, ...} to reach flake inputs
     specialArgs = {inherit inputs;};
     modules = [
-      ./configuration.nix
+      ../configuration.nix
       # Appended features (system-level):
-      ./modules/steam.nix
+      ../legacy/steam.nix
       inputs.microvm.nixosModules.host
-      ./microvms/host.nix
+      ../microvms/host.nix
       inputs.home-manager.nixosModules.home-manager
       {
         # Host appends: system-level features go in modules; user-level
@@ -56,12 +56,12 @@ in {
         # Home Manager extra list.
         home-manager = hmFor "xavier" "/home/xavier" [
           inputs.walker.homeManagerModules.default
-          ./modules/walker
-          ./modules/gnome.nix
-          ./modules/machine-report
-          ./modules/bitwarden.nix
-          ./modules/discord.nix
-          ./modules/prismlauncher.nix
+          ../legacy/walker
+          ../legacy/gnome.nix
+          ../legacy/machine-report
+          ../legacy/bitwarden.nix
+          ../legacy/discord.nix
+          ../legacy/prismlauncher.nix
         ];
         nixpkgs.overlays = [haxOverlay];
         # Bare `nixpkgs#` references (incl. comma) resolve to the exact
