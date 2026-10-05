@@ -39,7 +39,6 @@
             "$HOME/.cargo/bin"
             "$HOME/.docker/bin"
             "$HOME/.codeium/windsurf/bin"
-            "$HOME/roc_nightly-macos_apple_silicon-2026-08-22-db56022"
           ];
           home.sessionVariables.BUN_INSTALL = "$HOME/.bun";
           home.shellAliases.vim = "nvim";
