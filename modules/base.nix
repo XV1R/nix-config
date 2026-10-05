@@ -6,7 +6,7 @@ in {
   flake.modules.homeManager.base = {pkgs, ...}: {
     imports = [
       homeManager.identity
-      ../legacy/nix-skills.nix
+      homeManager.nix-skills
       ../legacy/nix-index.nix
       homeManager.opencode
       homeManager.helix
