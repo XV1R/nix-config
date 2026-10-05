@@ -21,7 +21,7 @@
       darwin.hax
       {
         home-manager.users.${macUser} = {
-          imports = [../home.nix homeManager.hax];
+          imports = [homeManager.base homeManager.hax];
           home.username = macUser;
           home.homeDirectory = "/Users/${macUser}";
         };
@@ -47,7 +47,7 @@ in {
         # user's Home Manager imports.
         home-manager.users.xavier = {
           imports = [
-            ../home.nix
+            homeManager.base
             homeManager.hax
             inputs.walker.homeManagerModules.default
             ../legacy/walker
