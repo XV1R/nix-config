@@ -49,8 +49,7 @@ in {
           imports = [
             homeManager.base
             homeManager.hax
-            inputs.walker.homeManagerModules.default
-            ../legacy/walker
+            homeManager.walker
             homeManager.gnome
             homeManager.machine-report
             homeManager.bitwarden
