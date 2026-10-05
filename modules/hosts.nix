@@ -55,7 +55,7 @@ in {
             homeManager.machine-report
             homeManager.bitwarden
             homeManager.discord
-            ../legacy/prismlauncher.nix
+            homeManager.prismlauncher
           ];
           home.username = "xavier";
           home.homeDirectory = "/home/xavier";
