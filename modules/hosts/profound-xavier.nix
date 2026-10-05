@@ -13,6 +13,7 @@
       darwin.home-manager
       darwin.hax
       darwin.nix
+      darwin.shell
       ({pkgs, ...}: {
         nixpkgs.hostPlatform = "aarch64-darwin";
 

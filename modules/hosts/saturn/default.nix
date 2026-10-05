@@ -17,6 +17,7 @@ in {
       nixos.home-manager
       nixos.hax
       nixos.nix
+      nixos.shell
       nixos.nh
       {
         home-manager.users.xavier = {
