@@ -10,7 +10,7 @@ in
     inherit version;
 
     # Licensed copy, intentionally gitignored — do not publish.
-    src = ../berkeley-mono-ligatures.zip;
+    src = ../../berkeley-mono-ligatures.zip;
 
     nativeBuildInputs = [unzip];
 

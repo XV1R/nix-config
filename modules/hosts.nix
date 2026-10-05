@@ -37,6 +37,7 @@ in {
       ../configuration.nix
       # Appended features (system-level):
       nixos.steam
+      nixos.berkeley-mono
       inputs.microvm.nixosModules.host
       ../microvms/host.nix
       nixos.home-manager
