@@ -10,7 +10,7 @@ in {
       ../legacy/nix-index.nix
       ../legacy/opencode
       ../legacy/helix
-      ../legacy/git
+      homeManager.git
       ../legacy/delta
       ../legacy/gh
       ../legacy/jujutsu
