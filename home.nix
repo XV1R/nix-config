@@ -42,6 +42,7 @@
     prettyping
     tokei
     glow
+    alejandra
     statix # nix linter; alejandra formats, statix finds antipatterns
     hax # oneshot agent (hax -p "…"), built via overlay from packages/hax.nix
     zoxide
