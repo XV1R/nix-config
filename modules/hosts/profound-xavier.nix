@@ -27,10 +27,37 @@
         # Project-level devenv.nix files in work repos are untouched by this.
         environment.systemPackages = [pkgs.devenv];
 
-        home-manager.users.${user} = {
+        home-manager.users.${user} = {lib, ...}: {
           imports = [homeManager.base homeManager.hax homeManager.starship];
           home.username = user;
           home.homeDirectory = "/Users/${user}";
+
+          # Tools installed outside Nix on this machine
+          home.sessionPath = [
+            "/opt/homebrew/opt/libpq/bin" # keg-only psql
+            "$HOME/.bun/bin"
+            "$HOME/.cargo/bin"
+            "$HOME/.docker/bin"
+            "$HOME/.codeium/windsurf/bin"
+            "$HOME/roc_nightly-macos_apple_silicon-2026-08-22-db56022"
+          ];
+          home.sessionVariables.BUN_INSTALL = "$HOME/.bun";
+          home.shellAliases.vim = "nvim";
+
+          programs.zsh.initContent = lib.mkMerge [
+            # Before compinit (order 570) so Docker's completions are found
+            (lib.mkOrder 550 "fpath=($HOME/.docker/completions $fpath)")
+            ''
+              [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+              [[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null
+              source "$HOME/infra-tooling/aws/sso/aws-login.sh"
+            ''
+          ];
+
+          # OrbStack: command-line tools and integration
+          programs.zsh.profileExtra = ''
+            source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+          '';
         };
       })
     ];
