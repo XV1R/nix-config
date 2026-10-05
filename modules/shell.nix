@@ -14,6 +14,13 @@ in {
     programs.bash.enable = true;
     programs.zsh = {
       enable = true;
+      history = {
+        size = 2000;
+        save = 1000;
+        share = false;
+        ignoreDups = false;
+        ignoreSpace = false;
+      };
       # Key bindings from macOS's /etc/zshrc, looked up from terminfo
       initContent = ''
         [[ -n $terminfo[kdch1] ]] && bindkey $terminfo[kdch1] delete-char
