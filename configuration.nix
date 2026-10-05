@@ -85,7 +85,10 @@
   users.users."xavier" = {
     isNormalUser = true;
     description = "xavier";
-    extraGroups = ["networkmanager" "wheel" "video"];
+    # gamemode: lets gamemoded apply the CPU governor switch while gaming
+    # (without it, gamemoded logs "Governor was not set to performance" on
+    # amd-pstate systems, see NixOS wiki GameMode known errors).
+    extraGroups = ["networkmanager" "wheel" "video" "gamemode"];
     packages = with pkgs; [
       #  thunderbird
     ];
