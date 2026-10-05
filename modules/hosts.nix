@@ -36,7 +36,7 @@ in {
     modules = [
       ../configuration.nix
       # Appended features (system-level):
-      ../legacy/steam.nix
+      nixos.steam
       inputs.microvm.nixosModules.host
       ../microvms/host.nix
       nixos.home-manager
