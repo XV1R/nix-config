@@ -6,7 +6,7 @@
   inputs,
   ...
 }: let
-  inherit (config.flake.modules) darwin homeManager nixos;
+  inherit (config.flake.modules) darwin homeManager;
 
   # Work laptop's LocalHostName and account name.
   macHost = "Profound-xavier";
@@ -30,42 +30,6 @@
     ];
   };
 in {
-  flake.nixosConfigurations.saturn = inputs.nixpkgs.lib.nixosSystem {
-    system = "x86_64-linux";
-    # Modules may declare {inputs, ...} to reach flake inputs
-    specialArgs = {inherit inputs;};
-    modules = [
-      ../configuration.nix
-      # Appended features (system-level):
-      nixos.steam
-      nixos.berkeley-mono
-      nixos.minecraft
-      nixos.home-manager
-      nixos.hax
-      nixos.nix
-      nixos.nh
-      {
-        # Host appends: system-level features go in modules; user-level
-        # features (walker, gnome, machine-report, discord, …) go in the
-        # user's Home Manager imports.
-        home-manager.users.xavier = {
-          imports = [
-            homeManager.base
-            homeManager.hax
-            homeManager.walker
-            homeManager.gnome
-            homeManager.machine-report
-            homeManager.bitwarden
-            homeManager.discord
-            homeManager.prismlauncher
-          ];
-          home.username = "xavier";
-          home.homeDirectory = "/home/xavier";
-        };
-      }
-    ];
-  };
-
   flake.darwinConfigurations.${macHost} = mac;
 
   # Short alias for explicitly targeting the Mac configuration.
