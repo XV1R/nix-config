@@ -4,6 +4,8 @@
   settings.home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    # Hand-written dotfiles Home Manager takes over are kept, not refused
+    backupFileExtension = "before-home-manager";
   };
 in {
   flake.modules.nixos.home-manager.imports = [
