@@ -12,7 +12,17 @@ in {
 
   flake.modules.homeManager.shell = {pkgs, ...}: {
     programs.bash.enable = true;
-    programs.zsh.enable = true;
+    programs.zsh = {
+      enable = true;
+      # Key bindings from macOS's /etc/zshrc, looked up from terminfo
+      initContent = ''
+        [[ -n $terminfo[kdch1] ]] && bindkey $terminfo[kdch1] delete-char
+        [[ -n $terminfo[khome] ]] && bindkey $terminfo[khome] beginning-of-line
+        [[ -n $terminfo[kend] ]] && bindkey $terminfo[kend] end-of-line
+        [[ -n $terminfo[kcuu1] ]] && bindkey $terminfo[kcuu1] up-line-or-search
+        [[ -n $terminfo[kcud1] ]] && bindkey $terminfo[kcud1] down-line-or-search
+      '';
+    };
 
     # zoxide's shell hook provides `z` (and the `c` alias below).
     programs.zoxide.enable = true;
