@@ -4,7 +4,6 @@
   settings.home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = {inherit inputs;};
   };
 in {
   flake.modules.nixos.home-manager.imports = [

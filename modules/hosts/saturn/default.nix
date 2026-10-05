@@ -9,8 +9,6 @@
 in {
   flake.nixosConfigurations.saturn = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
-    # Modules may declare {inputs, ...} to reach flake inputs
-    specialArgs = {inherit inputs;};
     modules = [
       ./_configuration.nix
       nixos.steam
