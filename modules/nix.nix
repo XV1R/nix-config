@@ -12,5 +12,10 @@ in {
     imports = [flakes];
     # The darwin branch of the same release (see flake.nix)
     nix.registry.nixpkgs.flake = inputs.nixpkgs-darwin;
+    # Defaults the Nix installer had written to /etc/nix/nix.conf
+    nix.settings = {
+      always-allow-substitutes = true;
+      bash-prompt-prefix = "(nix:$name)\\040";
+    };
   };
 }
