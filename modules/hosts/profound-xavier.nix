@@ -37,9 +37,11 @@
             "/opt/homebrew/opt/libpq/bin" # keg-only psql
             "$HOME/.bun/bin"
             "$HOME/.cargo/bin"
-            "$HOME/.docker/bin"
             "$HOME/.codeium/windsurf/bin"
           ];
+          home.sessionVariablesExtra = ''
+            export PATH="$PATH:$HOME/.docker/bin"
+          '';
           home.sessionVariables.BUN_INSTALL = "$HOME/.bun";
           home.shellAliases.vim = "nvim";
 
