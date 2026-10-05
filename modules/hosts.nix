@@ -53,7 +53,7 @@ in {
             ../legacy/walker
             homeManager.gnome
             homeManager.machine-report
-            ../legacy/bitwarden.nix
+            homeManager.bitwarden
             ../legacy/discord.nix
             ../legacy/prismlauncher.nix
           ];
