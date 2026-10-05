@@ -1,9 +1,11 @@
 # Home Manager base shared by every host's user: the common feature set
 # and everyday CLI tools. Host-specific features are added by each host.
-{
+{config, ...}: let
+  inherit (config.flake.modules) homeManager;
+in {
   flake.modules.homeManager.base = {pkgs, ...}: {
     imports = [
-      ../vars.nix
+      homeManager.identity
       ../legacy/nix-skills.nix
       ../legacy/nix-index.nix
       ../legacy/opencode
