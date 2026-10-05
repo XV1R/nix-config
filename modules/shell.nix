@@ -8,7 +8,28 @@ let
   };
 in {
   flake.modules.nixos.shell = zsh;
-  flake.modules.darwin.shell = zsh;
+  flake.modules.darwin.shell = {
+    imports = [zsh];
+
+    # What macOS's /etc/zshrc, /etc/zprofile and /etc/bashrc did besides Nix setup
+    programs.zsh.interactiveShellInit = ''
+      if [[ ! -x /usr/bin/locale ]] || [[ "$(locale LC_CTYPE)" == "UTF-8" ]]; then
+        setopt COMBINING_CHARS
+      fi
+      # Keep /usr/bin/log reachable instead of zsh's log builtin
+      disable log
+      # Terminal.app integration (session restore, working directory)
+      [ -r "/etc/zshrc_$TERM_PROGRAM" ] && . "/etc/zshrc_$TERM_PROGRAM"
+    '';
+    programs.zsh.loginShellInit = ''
+      if [ -z "$LANG" ]; then
+        export LANG=C.UTF-8
+      fi
+    '';
+    programs.bash.interactiveShellInit = ''
+      [ -r "/etc/bashrc_$TERM_PROGRAM" ] && . "/etc/bashrc_$TERM_PROGRAM"
+    '';
+  };
 
   flake.modules.homeManager.shell = {pkgs, ...}: {
     programs.bash.enable = true;
