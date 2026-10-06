@@ -45,6 +45,7 @@
     statix # nix linter; alejandra formats, statix finds antipatterns
     hax # oneshot agent (hax -p "…"), built via overlay from packages/hax.nix
     zoxide
+    ghostty
     # Per-app entries like discord/steam/prismlauncher are NOT here: they
     # live in modules/ and are appended per host in hosts.nix.
   ];
