@@ -7,8 +7,6 @@
   pkgs,
   ...
 }: {
-  microvm.autostart = ["minecraft"];
-
   microvm.vms.minecraft = {
     specialArgs = {inherit inputs;};
     # null = instantiate the guest's own package set, so the guest's
