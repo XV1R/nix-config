@@ -8,7 +8,7 @@
 }: {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    ./_hardware-configuration.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -99,23 +99,6 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-
-  # nh: rebuilds with a derivation diff and confirmation prompt, plus a
-  # weekly garbage collection with retention. Agents keep using plain
-  # nixos-rebuild per the machine rules in opencode/AGENTS.md.
-  programs.nh = {
-    enable = true;
-    flake = "/home/xavier/config";
-    clean = {
-      enable = true;
-      dates = "weekly";
-      extraArgs = "--keep-since 4d --keep 5";
-    };
-  };
-
-  # Licensed Berkeley Mono copy (zip is gitignored)
-  fonts.packages = [(pkgs.callPackage ./packages/berkeley-mono.nix {})];
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).

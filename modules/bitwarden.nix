@@ -1,3 +1,5 @@
-{pkgs, ...}: {
-  home.packages = [pkgs.bitwarden-desktop];
+{
+  flake.modules.homeManager.bitwarden = {pkgs, ...}: {
+    home.packages = [pkgs.bitwarden-desktop];
+  };
 }
