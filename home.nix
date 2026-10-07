@@ -46,6 +46,13 @@
     hax # oneshot agent (hax -p "…"), built via overlay from packages/hax.nix
     zoxide
     ghostty
+    fd
+    fselect
+    typst
+    tldr
+    asciinema
+    tokei
+
     # Per-app entries like discord/steam/prismlauncher are NOT here: they
     # live in modules/ and are appended per host in hosts.nix.
   ];
