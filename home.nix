@@ -16,6 +16,9 @@
     ./modules/delta
     ./modules/gh
     ./modules/jujutsu
+    # fzf with bash integration: Ctrl-R becomes fuzzy reverse history search
+    # (plus Ctrl-T file picker and Alt-C directory jumper as freebies).
+    ./modules/fzf
     # Per-host modules (walker, gnome, machine-report, …) are appended in
     # hosts.nix via extraModules.
   ];
@@ -26,7 +29,14 @@
   programs.home-manager.enable = true;
 
   # Manages ~/.bashrc so home.shellAliases and zoxide's shell hook take effect.
-  programs.bash.enable = true;
+  programs.bash = {
+    enable = true;
+    # Bash's default history is ~500 entries — far too small to be worth
+    # fuzzy-searching. ignorespace keeps space-prefixed commands (secrets,
+    # throwaways) out of history entirely.
+    historySize = 10000;
+    historyControl = ["ignorespace"];
+  };
 
   # zoxide needs shell integration; this installs it and sets up the `z` hook.
   programs.zoxide.enable = true;
