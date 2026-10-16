@@ -5,6 +5,9 @@
   # zsh is the login shell here. Home Manager writes ~/.zshenv and ~/.zshrc,
   # so the shared aliases, zoxide, fzf and starship hooks reach zsh too.
   programs.zsh.enable = true;
+  programs.zsh.initContent = ''
+    eval "$(devenv hook zsh)"
+  '';
   # OrbStack (Profound Self Service) maintains this script: it adds
   # ~/.orbstack/bin (docker, kubectl, orb) and completions
   programs.zsh.profileExtra = ''

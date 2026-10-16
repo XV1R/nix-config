@@ -76,9 +76,9 @@
 
   home.shellAliases = {
     ls = "eza --group-directories-first";
-    l = "eza -l";
-    la = "eza -la";
-    lt = "eza --tree";
+    l = "eza -l --group-directories-first";
+    la = "ls -la --group-directories-first";
+    lt = "ls --tree --group-directories-first";
     ps = "procs";
     pgrep = "procs --pgrep";
     ping = "prettyping --nolegend";
