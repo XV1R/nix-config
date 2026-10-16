@@ -32,9 +32,11 @@
     specialArgs = {inherit macUser inputs;};
     modules = [
       ./darwin/configuration.nix
+      ./darwin/shell.nix
       inputs.home-manager.darwinModules.home-manager
       {
         home-manager = hmFor macUser "/Users/${macUser}" [
+          ./darwin/home.nix
           ./modules/ghostty.nix
         ];
         nixpkgs.overlays = [haxOverlay];

@@ -44,8 +44,15 @@
     ];
   };
 
+  # Was enabled by hand in /etc/pam.d/sudo_local, which nix-darwin now writes
+  security.pam.services.sudo_local.touchIdAuth = true;
+
   # Home Manager (wired in flake.nix) needs the user's home path.
   users.users.${macUser}.home = "/Users/${macUser}";
+
+  # Existing dotfiles (~/.profile, helix, jj, gh configs) are renamed to
+  # *.before-home-manager instead of aborting activation.
+  home-manager.backupFileExtension = "before-home-manager";
 
   # Declarative devenv CLI — replaces the imperative `nix profile install`.
   # Project-level devenv.nix files in work repos are untouched by this.
