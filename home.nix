@@ -61,6 +61,14 @@
     tldr
     asciinema
     tokei
+    ripgrep
+    lazygit
+    jjui # jj TUI
+    neovim
+    zellij
+    mprocs # run several processes in one TUI
+    diffnav # navigable diff pager
+    dua # interactive disk usage
 
     # Per-app entries like discord/steam/prismlauncher are NOT here: they
     # live in modules/ and are appended per host in hosts.nix.

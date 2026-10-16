@@ -1,8 +1,12 @@
 {config, ...}: {
   programs.git = {
     enable = true;
-    settings.user = {
-      inherit (config.var.git) name email;
+    settings = {
+      user = {
+        inherit (config.var.git) name email;
+      };
+      core.editor = "hx";
+      merge.conflictStyle = "zdiff3";
     };
   };
 }

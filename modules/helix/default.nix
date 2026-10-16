@@ -1,4 +1,4 @@
-{...}: let
+{lib, ...}: let
   # uchū palette (https://github.com/NeverCease/uchu), hex-converted
   uchu = builtins.fromJSON (builtins.readFile ./uchu.json);
   inherit (uchu.general) yang yin;
@@ -16,7 +16,16 @@
 in {
   programs.helix = {
     enable = true;
-    settings.theme = "uchu";
+    settings = {
+      # Hosts may pick another theme (the Mac does, in darwin/home.nix)
+      theme = lib.mkDefault "uchu";
+      editor.lsp = {
+        display-messages = true;
+        display-progress-messages = true;
+      };
+    };
+
+    themes.qt_creator_dark = ./qt_creator_dark.toml;
 
     themes.uchu = {
       # Light mode: yang background, contrast from the .dark variants
@@ -273,6 +282,16 @@ in {
           args = ["-"];
         };
       }
+      {
+        name = "rust";
+        auto-format = true;
+        formatter = {
+          command = "rustfmt";
+          args = ["--edition" "2024"];
+        };
+      }
     ];
+    # cargo check only the saved file's package (-p), not --workspace
+    languages.language-server.rust-analyzer.config.check.workspace = false;
   };
 }
