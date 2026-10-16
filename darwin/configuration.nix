@@ -21,6 +21,29 @@
   # bootstrapped the machine; keep flakes enabled either way.
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  # Carried over from the Nix installer's /etc/nix/nix.conf and nix.custom.conf,
+  # which nix-darwin replaces.
+  nix.settings = {
+    # Installer defaults
+    always-allow-substitutes = true;
+    bash-prompt-prefix = "(nix:$name)\\040";
+
+    # Added to nix-darwin's default [root]. Lets devenv and project flakes add
+    # their own caches; equivalent to root access through the daemon.
+    trusted-users = [macUser];
+
+    # devenv and its cachix dependency (see environment.systemPackages)
+    extra-substituters = ["https://devenv.cachix.org" "https://cachix.cachix.org"];
+
+    extra-trusted-public-keys = [
+      # devenv, cachix
+      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+      "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
+      # Profound's binary cache
+      "profound-nix-binary-cache-1:f1ZchuV4BJnwqQIn0RJlIRkzTFgUrFZNRkBW6sZfDqk="
+    ];
+  };
+
   # Home Manager (wired in flake.nix) needs the user's home path.
   users.users.${macUser}.home = "/Users/${macUser}";
 
