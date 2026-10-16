@@ -22,11 +22,10 @@
     };
   };
 
-  # TODO(mac): fill in from the laptop:
-  #   host: scutil --get LocalHostName
-  #   user: whoami
-  macHost = "workbook";
-  macUser = "work";
+  # host: scutil --get LocalHostName (darwin-rebuild's default attribute)
+  # user: whoami
+  macHost = "Profound-xavier";
+  macUser = "xavier-profound";
 
   mac = inputs.nix-darwin.lib.darwinSystem {
     system = "aarch64-darwin";
@@ -35,7 +34,9 @@
       ./darwin/configuration.nix
       inputs.home-manager.darwinModules.home-manager
       {
-        home-manager = hmFor macUser "/Users/${macUser}" [];
+        home-manager = hmFor macUser "/Users/${macUser}" [
+          ./modules/ghostty.nix
+        ];
         nixpkgs.overlays = [haxOverlay];
       }
     ];
@@ -65,6 +66,7 @@ in {
           ./modules/bitwarden.nix
           ./modules/discord.nix
           ./modules/prismlauncher.nix
+          ./modules/ghostty.nix
         ];
         nixpkgs.overlays = [haxOverlay];
         # Bare `nixpkgs#` references (incl. comma) resolve to the exact
