@@ -33,6 +33,8 @@
     modules = [
       ./darwin/configuration.nix
       ./darwin/shell.nix
+      ./darwin/homebrew.nix
+      inputs.nix-homebrew.darwinModules.nix-homebrew
       inputs.home-manager.darwinModules.home-manager
       {
         home-manager = hmFor macUser "/Users/${macUser}" [

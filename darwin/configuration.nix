@@ -50,6 +50,9 @@
   # Home Manager (wired in flake.nix) needs the user's home path.
   users.users.${macUser}.home = "/Users/${macUser}";
 
+  # Runs user-level steps during activation, such as `brew bundle`
+  system.primaryUser = macUser;
+
   # Existing dotfiles (~/.profile, helix, jj, gh configs) are renamed to
   # *.before-home-manager instead of aborting activation.
   home-manager.backupFileExtension = "before-home-manager";

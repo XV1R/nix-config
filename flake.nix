@@ -24,6 +24,10 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
+    # Installs and pins Homebrew itself on the Mac; what Homebrew installs
+    # is declared with nix-darwin's homebrew.* options
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
     nix-skills.url = "github:olafkfreund/nix-skills";
 
     # Prebuilt nix-index database: powers comma and command-not-found
