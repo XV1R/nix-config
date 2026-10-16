@@ -8,6 +8,11 @@
     # Darwin branch of the same release: better aarch64-darwin cache coverage
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
 
+    # For fast-moving tools whose 26.05 versions fall behind (see
+    # modules/dev-tools.nix). nixpkgs-unstable, unlike nixos-unstable, is
+    # gated on darwin builds too.
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,6 +38,10 @@
       url = "github:OleksandrChekhovskyi/hax";
       flake = false;
     };
+
+    # Rust and C/C++ build cache (not in nixpkgs). Keeps its own nixpkgs and
+    # Rust toolchain pins; it has no binary cache, so updates build locally.
+    kache.url = "github:kunobi-ninja/kache/stable";
 
     # Launcher: walker (frontend) + elephant (provider daemon). Imported for
     # their Home Manager modules; walker's package comes from nixpkgs, while

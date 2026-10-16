@@ -38,6 +38,10 @@
         home-manager = hmFor macUser "/Users/${macUser}" [
           ./darwin/home.nix
           ./modules/ghostty.nix
+          ./modules/starship.nix
+          ./modules/dev-tools.nix
+          ./modules/kache.nix
+          ./modules/work.nix
         ];
         nixpkgs.overlays = [haxOverlay];
       }

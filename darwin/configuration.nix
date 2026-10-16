@@ -59,7 +59,8 @@
   # nh covers `nh darwin switch` / `nh clean` on this side too.
   environment.variables.NH_FLAKE = "/Users/${macUser}/nix-config";
   environment.systemPackages = [
-    pkgs.devenv
+    # Stable nixpkgs lags devenv's releases
+    inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.devenv
     pkgs.nh
   ];
 }
