@@ -29,11 +29,22 @@
   networking.networkmanager.enable = true;
 
   # The RTL8125 2.5G NIC (enp42s0) flaps its link when Energy-Efficient
-  # Ethernet is enabled (OS-independent: happens on Windows too). Keep EEE off
-  # whenever the interface appears.
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="net", DRIVERS=="r8169", ATTR{address}=="d8:bb:c1:e1:43:43", RUN+="${pkgs.ethtool}/bin/ethtool --set-eee $kernel eee off"
-  '';
+  # Ethernet is enabled (OS-independent: happens on Windows too). Disable EEE
+  # on every activation: the PHY re-enables EEE during link init, so a udev
+  # add rule fires too early and gets overwritten. The dispatcher runs after
+  # NetworkManager has brought the connection up, and again after every
+  # reconnect.
+  networking.networkmanager.dispatcherScripts = [
+    {
+      source = pkgs.writeText "r8169-eee-off" ''
+        #!${pkgs.runtimeShell}
+        if [ "$1" = enp42s0 ] && [ "$2" = up ]; then
+          ${pkgs.ethtool}/bin/ethtool --set-eee "$1" eee off
+        fi
+      '';
+      type = "basic";
+    }
+  ];
 
   # Set your time zone.
   time.timeZone = "America/New_York";
