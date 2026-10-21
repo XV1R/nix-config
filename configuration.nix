@@ -110,7 +110,14 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+    # Deadlock mod manager's CI cache: avoids a long local Rust/WebKitGTK build
+    extra-substituters = ["https://deadlock-mod-manager.cachix.org"];
+    extra-trusted-public-keys = [
+      "deadlock-mod-manager.cachix.org-1:wUjtzL6yN2i9zTq1YrXHBr0mx3LP7tBGsosk3N+/A/M="
+    ];
+  };
 
   # nh: rebuilds with a derivation diff and confirmation prompt, plus a
   # weekly garbage collection with retention. Agents keep using plain

@@ -75,6 +75,7 @@ in {
           ./modules/discord.nix
           ./modules/prismlauncher.nix
           ./modules/ghostty.nix
+          ./modules/deadlock-mod-manager.nix
         ];
         nixpkgs.overlays = [haxOverlay];
         # Bare `nixpkgs#` references (incl. comma) resolve to the exact

@@ -64,6 +64,9 @@
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     nix-minecraft.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Deadlock mod manager (GUI app only — mod selection is runtime state)
+    deadlock-mod-manager.url = "github:deadlock-mod-manager/deadlock-mod-manager";
+
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
