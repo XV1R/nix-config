@@ -13,6 +13,10 @@
     # nixpkgs.overlays (nix-minecraft) and allowUnfree actually apply.
     pkgs = null;
     config = import ./minecraft;
+    # Manual start only (systemctl start microvm@minecraft): the VM must not
+    # come up at boot. Note dumbpipe-minecraft below also no longer starts at
+    # boot, since its `wants` would pull the VM up regardless of this flag.
+    autostart = false;
   };
 
   # ~/minecraft is the user's data folder (worlds, logs, mod jars). Expose
@@ -73,7 +77,8 @@
   # traffic onto relay fallback.
   systemd.services.dumbpipe-minecraft = {
     description = "Expose minecraft VM (host port 25565) over iroh via dumbpipe";
-    wantedBy = ["multi-user.target"];
+    # No wantedBy: never starts at boot. Start manually alongside the VM,
+    # which its `wants` pulls up automatically.
     after = ["dumbpipe-keygen.service" "microvm@minecraft.service"];
     wants = ["microvm@minecraft.service"];
     requires = ["dumbpipe-keygen.service"];
