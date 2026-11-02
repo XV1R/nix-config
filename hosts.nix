@@ -61,6 +61,7 @@ in {
       ./modules/tailscale.nix
       inputs.rex.nixosModules.default
       ./modules/rex.nix
+      ./modules/miniflux.nix
       inputs.microvm.nixosModules.host
       ./microvms/host.nix
       inputs.home-manager.nixosModules.home-manager
