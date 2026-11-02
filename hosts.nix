@@ -58,6 +58,7 @@ in {
       ./configuration.nix
       # Appended features (system-level):
       ./modules/steam.nix
+      ./modules/tailscale.nix
       inputs.microvm.nixosModules.host
       ./microvms/host.nix
       inputs.home-manager.nixosModules.home-manager
