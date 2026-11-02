@@ -67,6 +67,13 @@
     # Deadlock mod manager (GUI app only — mod selection is runtime state)
     deadlock-mod-manager.url = "github:deadlock-mod-manager/deadlock-mod-manager";
 
+    # Rex multiplexer server (prebuilt, proprietary). Preview channel: there is
+    # no stable release yet. The lock pins the exact release;
+    # `nix flake update rex` moves to the channel's newest. Following our
+    # nixpkgs only changes which glibc/pam/patchelf the binary is patched with.
+    rex.url = "https://pkgs.superlogical.com/rex/nix/preview.tar.gz";
+    rex.inputs.nixpkgs.follows = "nixpkgs";
+
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
