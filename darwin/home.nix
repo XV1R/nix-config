@@ -16,6 +16,11 @@
   programs.zsh.initContent = ''
     eval "$(devenv hook zsh)"
   '';
+  # Rex puts its CLI on PATH, but nix-darwin's /etc/zshenv resets PATH;
+  # REX_BIN_DIR survives, so restore it here (~/.zshenv runs after).
+  programs.zsh.envExtra = ''
+    [[ -n $REX_BIN_DIR ]] && path=("$REX_BIN_DIR" $path)
+  '';
   # OrbStack (Profound Self Service) maintains this script: it adds
   # ~/.orbstack/bin (docker, kubectl, orb) and completions
   programs.zsh.profileExtra = ''
