@@ -277,6 +277,7 @@ in {
       {
         name = "nix";
         auto-format = true;
+        language-servers = ["nixd" "nil"];
         formatter = {
           command = "alejandra";
           args = ["-"];
