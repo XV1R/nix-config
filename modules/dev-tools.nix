@@ -30,6 +30,7 @@ in {
     codex # OpenAI Codex CLI
     alejandra # Nix formatter
     nil # Nix language server
+    nixd # Nix language server that evaluates flakes for option completion
     # GNU coreutils as gls, gdate, …, leaving macOS's BSD tools in place
     coreutils-prefixed
     unstable.mise
