@@ -2,12 +2,11 @@
 {
   programs.helix.settings.theme = "qt_creator_dark";
 
-  # nixd evaluates this flake to complete nix-darwin options and pkgs
+  # nixd completes pkgs; the host flake supplies the nix-darwin options source
   programs.helix.languages.language-server.nixd = {
     command = "nixd";
     config.nixd = {
       nixpkgs.expr = "import <nixpkgs> { }";
-      options.darwin.expr = ''(builtins.getFlake "/Users/xavier-profound/nix-config").darwinConfigurations.mac.options'';
     };
   };
 
