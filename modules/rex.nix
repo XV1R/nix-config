@@ -9,6 +9,12 @@
 # "Add Remote Host…". Needs modules/tailscale.nix and the
 # rex.nixosModules.default import (both appended in hosts.nix).
 # NixOS-level: never import this into darwin.
+#
+# One-time, imperative setup (like tailscale's in modules/tailscale.nix):
+#   rex skill setup --agent opencode   # agent skill stub in ~/.agents/skills/rex
+# The stub is versioned by rex and reads its guide from the installed rex at
+# runtime, so rex owns that file — don't declare it in home-manager. The
+# docs MCP for agents ("superlogical") is declared in modules/opencode.
 {
   services.rex.loginServer = {
     enable = true;
@@ -18,4 +24,13 @@
     accounts.xavier.principals = ["tailscale:XV1R@github"];
     tailscaleServe.enable = true;
   };
+
+  # Rex puts its bin dir first on PATH in its own terminals and exports
+  # REX_BIN_DIR, but a fixed NixOS PATH can drop it again. Rex's docs
+  # prescribe exactly this restore for interactive shells.
+  environment.interactiveShellInit = ''
+    if [ -n "$REX_BIN_DIR" ]; then
+      export PATH="$REX_BIN_DIR:$PATH"
+    fi
+  '';
 }
